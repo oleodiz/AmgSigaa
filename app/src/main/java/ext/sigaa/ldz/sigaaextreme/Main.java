@@ -32,13 +32,12 @@ import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 
-import org.apache.http.util.EncodingUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
 import ext.sigaa.ldz.sigaaextreme.Adapters.TurmasAdapter;
+import ext.sigaa.ldz.sigaaextreme.Objetos.Aula;
 import ext.sigaa.ldz.sigaaextreme.Objetos.DetalhesTurma;
 import ext.sigaa.ldz.sigaaextreme.Objetos.Turma;
 
@@ -71,7 +70,7 @@ public class Main extends ActionBarActivity {
     }
     boolean podeProcessar;
     //OBJETOS GERAIS
-    public enum PaginaAtual{LOGIN, MENU_PRINCIPAL, PORTAL_DISCENTE};
+    public enum PaginaAtual{LOGIN, MENU_PRINCIPAL, PORTAL_DISCENTE, TURMA};
     boolean comErro;
     FrameLayout area_geral;
     WebView web;
@@ -80,6 +79,8 @@ public class Main extends ActionBarActivity {
     SharedPreferences.Editor editor;
     LayoutInflater layoutInflater;
     View vw_login, vw_perfil;
+    List<Turma> minhasTurmas;
+    int posicaoTurmaSelecionada;
     //OBJETOS LOGIN
     EditText edt_usuario, edt_senha;
     Button btn_entrar;
@@ -394,7 +395,7 @@ public class Main extends ActionBarActivity {
         }
         protected void onPostExecute(Boolean result) {
             if(result)
-                new CarregaTurmas().executeOnExecutor(Executors.newFixedThreadPool(4), html);
+                new CarregaTurmasDoPeriodo().executeOnExecutor(Executors.newFixedThreadPool(4), html);
 
         }
 
@@ -430,8 +431,7 @@ public class Main extends ActionBarActivity {
         }
     }
 
-    private class CarregaTurmas extends AsyncTask<String, String, Boolean> {
-        List<Turma> minhasTurmas;
+    private class CarregaTurmasDoPeriodo extends AsyncTask<String, String, Boolean> {
         @Override
         protected Boolean doInBackground(String... html) {
             String turmas="";
@@ -481,6 +481,7 @@ public class Main extends ActionBarActivity {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
                 {
+                    posicaoTurmaSelecionada =i;
                     ArrayList<String> scripts = new ArrayList<String>();
                     scripts.add("jsfcljs(document.forms['"+minhasTurmas.get(i).idForm+"'],'"+minhasTurmas.get(i).idForm+":turmaVirtual,"+minhasTurmas.get(i).idForm+":turmaVirtual','');");
                     executaScripts(scripts);
@@ -543,16 +544,51 @@ public class Main extends ActionBarActivity {
             }
             return " ? ";
         }
+    }
 
-        protected void onPostExecute(Boolean result) {
-            if(result)
-            {
+    private class CarregaTurma extends AsyncTask<String, String, Boolean> {
+        @Override
+        protected Boolean doInBackground(String... html) {
+            List<Aula> aulas;
+            String aul="";
+            int inicioAulas = html[0].indexOf("class=\"titulo\"");
 
+            if (inicioAulas != -1) {
+                aulas = new ArrayList<Aula>();
+                aul = html[0].substring(inicioAulas, html[0].indexOf("id=\"rodape\""));
+                int ini = aul.indexOf("class=\"titulo\"");
+                while (ini != -1)
+                {
+                    int fim = aul.indexOf("<span");
+                    if (fim != -1)
+                    {
+                        minhasTurmas.get(posicaoTurmaSelecionada).aulas.add(trataAula(aul.substring(ini, fim)));
+                        aul = aul.substring(fim);
+                        ini = aul.indexOf("class=\"titulo\"");
+                    }
+                }
             }
+            else
+                return false;
+
+            return true;
+        }
+        @Override
+        protected void onProgressUpdate(String... dadosPerfil) {
+
 
         }
 
+        protected Aula trataAula(String turma)
+        {
+            Aula retorno = new Aula();
+
+
+            return retorno;
+        }
+
     }
+
 
 
     private class VerificaErros extends AsyncTask<String, String, Boolean> {

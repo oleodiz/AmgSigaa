@@ -12,10 +12,12 @@ public class Turma {
     public String descricao;
 
     public List<DetalhesTurma> detalhes;
+    public List<Aula> aulas;
 
     public Turma()
     {
         detalhes = new ArrayList<DetalhesTurma>();
+        aulas =  new ArrayList<Aula>();
     }
 
 }
