@@ -1,0 +1,521 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal">
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:background="#80BBF0">
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/sigaa"
+                android:layout_gravity="center"/>
+
+        </FrameLayout>
+
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/background">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                android:weightSum="3">
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+
+                    <com.pkmmte.view.CircularImageView
+                        android:layout_marginTop="10dp"
+                        android:layout_width="100dp"
+                        android:layout_height="120dp"
+                        android:id="@+id/img_perfil"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        app:border="true"
+                        app:border_color="#ff12baee"
+                        app:border_width="3dp"
+                        app:shadow="true" />
+
+                </FrameLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_horizontal">
+
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dp"
+                        android:orientation="vertical"
+                        android:layout_gravity="center_horizontal">
+
+                        <ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView
+                            android:singleLine="true"
+                            android:layout_height="wrap_content"
+                            android:layout_width="fill_parent"
+                            android:text="NOME"
+                            android:id="@+id/txt_nome"
+                            android:textSize="20sp"
+                            android:textColor="#666666"
+                            android:textStyle="bold"
+                            />
+
+                        <ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView
+                            android:singleLine="true"
+                            android:layout_height="wrap_content"
+                            android:layout_width="fill_parent"
+                            android:text="ENGENHARIA DO PETRÓLEO/DDD - São Cristóvão"
+                            android:id="@+id/txt_curso"
+                            android:textSize="15sp"
+                            android:textColor="#999999"
+                            android:layout_marginLeft="20dp"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="60dp"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="3dp"
+                            android:layout_height="fill_parent"
+                            android:background="#E1E1E1"/>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <ext.sigaa.ldz.sigaaextreme.Auxiliares.FontTextView
+                                    android:layout_height="wrap_content"
+                                    android:layout_width="wrap_content"
+                                    android:text="Matrícula"
+                                    android:textSize="20sp"
+                                    android:textColor="#666666"
+                                    android:gravity="center"
+                                    />
+
+                                <ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView
+                                    android:singleLine="true"
+                                    android:layout_height="wrap_content"
+                                    android:layout_width="wrap_content"
+                                    android:text="0000000000"
+                                    android:id="@+id/txt_matricula"
+                                    android:textSize="15sp"
+                                    android:textColor="#999999"
+                                    android:gravity="center"
+
+                                    />
+
+                            </LinearLayout>
+
+                        <TextView
+                            android:layout_width="3dp"
+                            android:layout_height="fill_parent"
+                            android:background="#E1E1E1"/>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:gravity="center">
+                                <ext.sigaa.ldz.sigaaextreme.Auxiliares.FontTextView
+                                    android:layout_height="wrap_content"
+                                    android:layout_width="wrap_content"
+                                    android:text="E-mail"
+                                    android:textSize="20sp"
+                                    android:textColor="#666666"
+                                    android:gravity="center"
+                                    />
+
+                                <ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView
+                                    android:singleLine="true"
+                                    android:layout_height="wrap_content"
+                                    android:layout_width="wrap_content"
+                                    android:text="sigaa@gmail.com"
+                                    android:id="@+id/txt_email"
+                                    android:textSize="15sp"
+                                    android:textColor="#999999"
+                                    android:gravity="center"
+
+                                    />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="#E1E1E1"/>
+
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="3dp"
+                        android:layout_height="fill_parent"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <ext.sigaa.ldz.sigaaextreme.Auxiliares.FontTextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="Nível"
+                            android:textSize="20sp"
+                            android:textColor="#666666"
+                            android:gravity="center"
+                            />
+
+                        <ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView
+                            android:singleLine="true"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="Graduação"
+                            android:id="@+id/txt_nivel"
+                            android:textSize="15sp"
+                            android:textColor="#999999"
+                            android:gravity="center"
+
+                            />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="3dp"
+                        android:layout_height="fill_parent"
+                        android:background="#E1E1E1"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <ext.sigaa.ldz.sigaaextreme.Auxiliares.FontTextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="Status"
+                            android:textSize="20sp"
+                            android:textColor="#666666"
+                            android:gravity="center"
+                            />
+
+                        <ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView
+                            android:singleLine="true"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="ATIVO"
+                            android:id="@+id/txt_status"
+                            android:textSize="15sp"
+                            android:textColor="#999999"
+                            android:gravity="center"
+
+                            />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="3dp"
+                        android:layout_height="fill_parent"
+                        android:background="#E1E1E1"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <ext.sigaa.ldz.sigaaextreme.Auxiliares.FontTextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="Ingresso"
+                            android:textSize="20sp"
+                            android:textColor="#666666"
+                            android:gravity="center"
+                            />
+
+                        <ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView
+                            android:singleLine="true"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="Vestibular"
+                            android:id="@+id/txt_ingresso"
+                            android:textSize="15sp"
+                            android:textColor="#999999"
+                            android:gravity="center"
+
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="#E1E1E1"/>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="3dp"
+                        android:layout_height="fill_parent"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <ext.sigaa.ldz.sigaaextreme.Auxiliares.FontTextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="Entrada"
+                            android:textSize="20sp"
+                            android:textColor="#666666"
+                            android:gravity="center"
+                            />
+
+                        <ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView
+                            android:singleLine="true"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="2010.2"
+                            android:id="@+id/txt_entrada"
+                            android:textSize="15sp"
+                            android:textColor="#999999"
+                            android:gravity="center"
+
+                            />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="3dp"
+                        android:layout_height="fill_parent"
+                        android:background="#E1E1E1"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <ext.sigaa.ldz.sigaaextreme.Auxiliares.FontTextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="MGP"
+                            android:textSize="20sp"
+                            android:textColor="#666666"
+                            android:gravity="center"
+                            />
+
+                        <ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView
+                            android:singleLine="true"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="7.5"
+                            android:id="@+id/txt_mgp"
+                            android:textSize="15sp"
+                            android:textColor="#999999"
+                            android:gravity="center"
+
+                            />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="3dp"
+                        android:layout_height="fill_parent"
+                        android:background="#E1E1E1"/>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <ext.sigaa.ldz.sigaaextreme.Auxiliares.FontTextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="IREG"
+                            android:textSize="20sp"
+                            android:textColor="#666666"
+                            android:gravity="center"
+                            />
+
+                        <ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView
+                            android:singleLine="true"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="1.000"
+                            android:id="@+id/txt_regularidade"
+                            android:textSize="15sp"
+                            android:textColor="#999999"
+                            android:gravity="center"
+
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="#E1E1E1"/>
+
+
+                <ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView
+                    android:layout_marginTop="10dp"
+                    android:singleLine="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Meu progresso"
+                    android:textSize="25sp"
+                    android:textColor="#666666"
+                    android:layout_gravity="center"
+
+                    />
+
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
+                        android:layout_gravity="center"
+                        android:id="@+id/pgr_percentual"
+                        android:layout_width="fill_parent"
+                        android:layout_height="60dp"
+                        app:rcIconPadding="3dp"
+                        app:rcIconSize="45dp"
+                        app:rcIconSrc="@drawable/formando"
+                        app:rcBackgroundPadding="5dp"
+                        app:rcBackgroundRadius="5dp"
+                        app:rcBackgroundColor="#9d79a8ff"
+                        app:rcHeaderColor="#ff76aaff"
+                        app:rcProgressColor="#ff65b9ff"
+                        app:rcProgress="0"
+                        app:rcMax="100" />
+
+                    <ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView
+                        android:textSize="20dp"
+                        android:layout_gravity="center"
+                        android:id="@+id/txt_percentual"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#FFFFFF"/>
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="3dp"
+                        android:background="#E1E1E1"/>
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="10dp"
+                        android:background="#fff3f3f3"/>
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="3dp"
+                        android:background="#E1E1E1"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lnr_areaTurmas"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="Turmas do semestre"
+                        android:textSize="25sp"
+                        android:textColor="#666666"
+                        android:layout_gravity="center" />
+
+
+                    <ListView
+                        android:id="@+id/lst_turmas"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+
+                    </ListView>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</merge>
