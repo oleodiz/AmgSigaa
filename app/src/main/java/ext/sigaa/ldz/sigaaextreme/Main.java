@@ -30,7 +30,15 @@ import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executors;
+
+import ext.sigaa.ldz.sigaaextreme.Objetos.DetalhesTurma;
+import ext.sigaa.ldz.sigaaextreme.Objetos.Turma;
+
+/**
+ * Created by Leonardo on 24/06/2015.
+ */
 
 public class Main extends ActionBarActivity {
 
@@ -42,8 +50,9 @@ public class Main extends ActionBarActivity {
             //Log.e("HTML", html);
             if (pagina == PaginaAtual.LOGIN && !comErro)
                 new VerificaErros().executeOnExecutor(Executors.newFixedThreadPool(4), html);
-            if (pagina == PaginaAtual.PORTAL_DISCENTE && txt_nome == null)
+            if (pagina == PaginaAtual.PORTAL_DISCENTE && txt_nome == null) {
                 new CarregaDadosPerfil().executeOnExecutor(Executors.newFixedThreadPool(4), html);
+            }
             //if (pagina == PaginaAtual.PORTAL_DISCENTE)
             //    processaImagem();
         }
@@ -297,16 +306,17 @@ public class Main extends ActionBarActivity {
     }
 
     private class CarregaDadosPerfil extends AsyncTask<String, String, Boolean> {
+        String html;
         @Override
-        protected Boolean doInBackground(String... html) {
-
+        protected Boolean doInBackground(String... entrada) {
+            html = entrada[0];
             String areaPerfil, nome, matricula, curso, cidade, sexo, nivel, status, email, ingresso, semestre, MGP, regularidade, percentual;
             areaPerfil = nome = matricula = sexo =nivel = status = email = ingresso = semestre = cidade = curso = MGP = regularidade =  percentual = "";
 
-            int auxPerfil = html[0].indexOf("class=\"nome\"");
+            int auxPerfil = entrada[0].indexOf("class=\"nome\"");
             if (auxPerfil == -1)
                 return false;
-            areaPerfil = html[0].substring(auxPerfil);
+            areaPerfil = entrada[0].substring(auxPerfil);
             areaPerfil = areaPerfil.substring(0, areaPerfil.indexOf("main-docente"));
 
             nome = areaPerfil.substring(areaPerfil.indexOf("<b>") + 3, areaPerfil.indexOf("</b>"));
@@ -373,12 +383,100 @@ public class Main extends ActionBarActivity {
             pgr_percentual.setProgress(Float.parseFloat(dadosPerfil[12].replace("%", "")));
 
         }
+        protected void onPostExecute(Boolean result) {
+            if(result)
+                new CarregaTurmas().executeOnExecutor(Executors.newFixedThreadPool(4), html);
+
+        }
 
         protected String limpaString(String sujo)
         {
             return sujo.replace("<td>","").replace("</td>","").replace("<tr>", "").replace("</tr>", "").replace("\n","").replace("\t", "").trim();
         }
     }
+
+    private class CarregaTurmas extends AsyncTask<String, String, Boolean> {
+        List<Turma> minhasTurmas;
+        @Override
+        protected Boolean doInBackground(String... html) {
+            String turmas="";
+            int inicioTurmas = html[0].indexOf("class=\"odd\"");
+
+            if (inicioTurmas != -1) {
+                minhasTurmas = new ArrayList<Turma>();
+                turmas = html[0].substring(inicioTurmas, html[0].indexOf("class=\"mais\""));
+                int ini = turmas.indexOf("class=\"descricao\"");
+                while (ini != -1)
+                {
+                    int fim = turmas.indexOf("<label");
+                    if (fim != -1)
+                    {
+                        minhasTurmas.add(trataTurma(turmas.substring(ini, fim)));
+                        turmas = turmas.substring(fim);
+                        ini = turmas.indexOf("class=\"descricao\"");
+                    }
+                }
+            }
+            return true;
+        }
+        @Override
+        protected void onProgressUpdate(String... dadosPerfil) {
+
+        }
+        protected Turma trataTurma(String turma)
+        {
+            Turma retorno = new Turma();
+            int iniId = turma.indexOf("hidden\" value=")+15;
+            retorno.id = turma.substring(iniId, turma.indexOf("\"", iniId));
+
+            int iniDes = turma.indexOf("}return false\">")+15;
+            retorno.descricao = turma.substring(iniDes, turma.indexOf("</", iniDes));
+
+            int iniDet = turma.indexOf(":left\">")+7;
+            retorno.detalhes = trataDetalhes(turma.substring(iniDet, turma.indexOf("</td>", iniDet)));
+            return retorno;
+        }
+
+        protected List<DetalhesTurma> trataDetalhes(String detalhes)
+        {
+            List<DetalhesTurma> retorno = new ArrayList<DetalhesTurma>();
+            String[] dets = detalhes.split("<br>");
+
+            for(String d : dets)
+            {
+                DetalhesTurma detTur = new DetalhesTurma();
+                detTur.dia = trataDia(d.charAt(0));
+                detTur.hora = d.substring(4, d.indexOf(" ", 4));
+                detTur.local = d.substring(d.indexOf(" ", 4));
+
+                retorno.add(detTur);
+            }
+
+            return retorno;
+        }
+
+        protected String trataDia(char dia) {
+            switch (dia) {
+                case '1':
+                    return "DOMINGO";
+                case '2':
+                    return "SEGUNDA";
+                case '3':
+                    return "TERÇA";
+                case '4':
+                    return "QUARTA";
+                case '5':
+                    return "QUINTA";
+                case '6':
+                    return "SEXTA";
+                case '7':
+                    return "SÁBADO";
+            }
+
+            return " ? ";
+        }
+    }
+
 
     private class VerificaErros extends AsyncTask<String, String, Boolean> {
         int codErro =0;
