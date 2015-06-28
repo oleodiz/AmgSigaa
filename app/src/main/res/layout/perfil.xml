@@ -8,8 +8,8 @@
 
         <FrameLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFF">
+            android:layout_height="wrap_content">
+            --android:background="#FFFFFF">
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -31,8 +31,8 @@
 
         <ScrollView
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@drawable/background">
+            android:layout_height="fill_parent">
+           -- android:background="@drawable/background">
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -455,8 +455,8 @@
                         app:rcProgress="0"
                         app:rcMax="100" />
 
-                    <ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView
-                        android:textSize="20dp"
+                    <ext.sigaa.ldz.sigaaextreme.Auxiliares.FontTextView
+                        android:textSize="20sp"
                         android:layout_gravity="center"
                         android:id="@+id/txt_percentual"
                         android:layout_width="wrap_content"
@@ -510,6 +510,25 @@
                     </ListView>
 
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="3dp"
+                        android:background="#E1E1E1"/>
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="10dp"
+                        android:background="#fff3f3f3"/>
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="3dp"
+                        android:background="#E1E1E1"/>
                 </LinearLayout>
 
             </LinearLayout>

@@ -8,6 +8,7 @@ import java.util.List;
  */
 public class Turma {
     public String id;
+    public String idForm;
     public String descricao;
 
     public List<DetalhesTurma> detalhes;

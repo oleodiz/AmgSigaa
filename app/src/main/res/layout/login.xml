@@ -75,7 +75,7 @@
                         android:paddingLeft="20dp"
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="20dp"
                         android:id="@+id/edt_usuario"
                         android:singleLine="true"
                         android:maxLines="1"

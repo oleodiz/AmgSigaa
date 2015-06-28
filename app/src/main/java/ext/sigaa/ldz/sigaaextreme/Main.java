@@ -15,24 +15,30 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 
+import org.apache.http.util.EncodingUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
+import ext.sigaa.ldz.sigaaextreme.Adapters.TurmasAdapter;
 import ext.sigaa.ldz.sigaaextreme.Objetos.DetalhesTurma;
 import ext.sigaa.ldz.sigaaextreme.Objetos.Turma;
 
@@ -82,6 +88,7 @@ public class Main extends ActionBarActivity {
     TextView  txt_nome,txt_curso, txt_matricula, txt_email, txt_nivel, txt_status, txt_ingresso, txt_entrada, txt_mgp, txt_regularidade, txt_percentual;
     ImageView img_perfil;
     IconRoundCornerProgressBar pgr_percentual;
+    ListView lst_turmas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +109,6 @@ public class Main extends ActionBarActivity {
                 web.setWebContentsDebuggingEnabled(true);
             }
         }
-
         web.addJavascriptInterface(new LoadListener(), "METODOS");
         web.setWebChromeClient(new WebChromeClient());
 
@@ -227,6 +233,7 @@ public class Main extends ActionBarActivity {
         txt_regularidade = (TextView) vw_perfil.findViewById(R.id.txt_regularidade);
         txt_percentual = (TextView) vw_perfil.findViewById(R.id.txt_percentual);
         pgr_percentual = (IconRoundCornerProgressBar) vw_perfil.findViewById(R.id.pgr_percentual);
+        lst_turmas = (ListView) vw_perfil.findViewById(R.id.lst_turmas);
 
     }
 
@@ -283,8 +290,9 @@ public class Main extends ActionBarActivity {
                 scriptsUnidos +=scripts.get(i);
             web.evaluateJavascript("javascript:"+scriptsUnidos, null);
         } else {
-            for (int i =0; i < scripts.size(); i++)
-                web.loadUrl("javascript:"+scripts.get(i));
+            for (int i =0; i < scripts.size(); i++) {
+                web.loadUrl("javascript:" + scripts.get(i));
+            }
         }
     }
 
@@ -379,8 +387,9 @@ public class Main extends ActionBarActivity {
             txt_ingresso.setText(dadosPerfil[9]);
             txt_mgp.setText(dadosPerfil[10]);
             txt_regularidade.setText(dadosPerfil[11]);
-            txt_percentual.setText(dadosPerfil[12]);
             pgr_percentual.setProgress(Float.parseFloat(dadosPerfil[12].replace("%", "")));
+
+            new Progresso().executeOnExecutor(Executors.newFixedThreadPool(4), Integer.parseInt(dadosPerfil[12].replace("%", "")));
 
         }
         protected void onPostExecute(Boolean result) {
@@ -392,6 +401,32 @@ public class Main extends ActionBarActivity {
         protected String limpaString(String sujo)
         {
             return sujo.replace("<td>","").replace("</td>","").replace("<tr>", "").replace("</tr>", "").replace("\n","").replace("\t", "").trim();
+        }
+    }
+
+    private class Progresso extends AsyncTask<Integer, Integer, Boolean> {
+        @Override
+        protected Boolean doInBackground(Integer... perc) {
+            int i =0;
+            int p = perc[0];
+            while (i <= p)
+            {
+                try {
+                    Thread.sleep(25);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                publishProgress(i);
+                i++;
+            }
+
+            return true;
+        }
+        @Override
+        protected void onProgressUpdate(Integer... p) {
+            pgr_percentual.setProgress(p[0]);
+            txt_percentual.setText(p[0] + "%");
+
         }
     }
 
@@ -408,7 +443,7 @@ public class Main extends ActionBarActivity {
                 int ini = turmas.indexOf("class=\"descricao\"");
                 while (ini != -1)
                 {
-                    int fim = turmas.indexOf("<label");
+                    int fim = turmas.indexOf("<label")+10;
                     if (fim != -1)
                     {
                         minhasTurmas.add(trataTurma(turmas.substring(ini, fim)));
@@ -417,10 +452,41 @@ public class Main extends ActionBarActivity {
                     }
                 }
             }
+            else
+                return false;
+            if (minhasTurmas != null)
+                publishProgress();
+
             return true;
         }
         @Override
         protected void onProgressUpdate(String... dadosPerfil) {
+
+            TurmasAdapter adapter = new TurmasAdapter(Main.this,minhasTurmas);
+            lst_turmas.setAdapter(adapter);
+
+            int totalHeight = 0;
+            for (int i = 0; i < adapter.getCount(); i++) {
+                View listItem = adapter.getView(i, null, lst_turmas);
+                listItem.measure(0, 0);
+                totalHeight += listItem.getMeasuredHeight();
+            }
+
+            ViewGroup.LayoutParams params = lst_turmas.getLayoutParams();
+            params.height = totalHeight + (lst_turmas.getDividerHeight() * (adapter.getCount() - 1));
+            lst_turmas.setLayoutParams(params);
+            lst_turmas.requestLayout();
+
+            lst_turmas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+                {
+                    ArrayList<String> scripts = new ArrayList<String>();
+                    scripts.add("jsfcljs(document.forms['"+minhasTurmas.get(i).idForm+"'],'"+minhasTurmas.get(i).idForm+":turmaVirtual,"+minhasTurmas.get(i).idForm+":turmaVirtual','');");
+                    executaScripts(scripts);
+                }
+            });
+
 
         }
         protected Turma trataTurma(String turma)
@@ -428,6 +494,9 @@ public class Main extends ActionBarActivity {
             Turma retorno = new Turma();
             int iniId = turma.indexOf("hidden\" value=")+15;
             retorno.id = turma.substring(iniId, turma.indexOf("\"", iniId));
+
+            int iniIdForm = turma.indexOf("form_acessarTurmaVirtual");
+            retorno.idForm = turma.substring(iniIdForm, turma.indexOf("\"", iniIdForm));
 
             int iniDes = turma.indexOf("}return false\">")+15;
             retorno.descricao = turma.substring(iniDes, turma.indexOf("</", iniDes));
@@ -472,9 +541,17 @@ public class Main extends ActionBarActivity {
                 case '7':
                     return "SÁBADO";
             }
-
             return " ? ";
         }
+
+        protected void onPostExecute(Boolean result) {
+            if(result)
+            {
+
+            }
+
+        }
+
     }
 
 
