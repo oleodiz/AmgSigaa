@@ -65,6 +65,9 @@ public class Main extends ActionBarActivity {
             if (pagina == PaginaAtual.TURMA) {
                 new CarregaTurma().executeOnExecutor(Executors.newFixedThreadPool(4), html);
             }
+            if (pagina == PaginaAtual.NOTAS) {
+               // new CarregaTurma().executeOnExecutor(Executors.newFixedThreadPool(4), html);
+            }
             //if (pagina == PaginaAtual.PORTAL_DISCENTE)
             //    processaImagem();
         }
@@ -77,7 +80,7 @@ public class Main extends ActionBarActivity {
     }
     boolean podeProcessar;
     //OBJETOS GERAIS
-    public enum PaginaAtual{LOGIN, MENU_PRINCIPAL, PORTAL_DISCENTE, TURMA};
+    public enum PaginaAtual{LOGIN, MENU_PRINCIPAL, PORTAL_DISCENTE, NOTAS, TURMA};
     boolean comErro;
     FrameLayout area_geral;
     WebView web;
@@ -94,7 +97,7 @@ public class Main extends ActionBarActivity {
     NiftyDialogBuilder dialogo;
     //OBJETOS DISCENTE
     TextView  txt_nome,txt_curso, txt_matricula, txt_email, txt_nivel, txt_status, txt_ingresso, txt_entrada, txt_mgp, txt_regularidade, txt_percentual;
-    ImageView img_perfil;
+    ImageView img_perfil, img_notas;
     IconRoundCornerProgressBar pgr_percentual;
     ListView lst_turmas;
     //OBJETOS TURMA
@@ -236,6 +239,7 @@ public class Main extends ActionBarActivity {
     {
         txt_nome = (TextView) vw_perfil.findViewById(R.id.txt_nome);
         img_perfil = (ImageView) vw_perfil.findViewById(R.id.img_perfil);
+        img_notas = (ImageView) vw_perfil.findViewById(R.id.img_notas);
         txt_curso = (TextView) vw_perfil.findViewById(R.id.txt_curso);
         txt_matricula = (TextView) vw_perfil.findViewById(R.id.txt_matricula);
         txt_email = (TextView) vw_perfil.findViewById(R.id.txt_email);
@@ -248,6 +252,18 @@ public class Main extends ActionBarActivity {
         txt_percentual = (TextView) vw_perfil.findViewById(R.id.txt_percentual);
         pgr_percentual = (IconRoundCornerProgressBar) vw_perfil.findViewById(R.id.pgr_percentual);
         lst_turmas = (ListView) vw_perfil.findViewById(R.id.lst_turmas);
+
+        img_notas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pagina = PaginaAtual.NOTAS;
+                ExibeDialog("Acessando Notas...", false, false, R.drawable.entrando, true);
+
+                ArrayList<String> scripts = new ArrayList<String>();
+                scripts.add("cmItemMouseUp($('td:contains(\"Horário Individual\"):first')[0].parentNode, 3);");
+                executaScripts(scripts);
+            }
+        });
 
     }
 
@@ -339,8 +355,6 @@ public class Main extends ActionBarActivity {
         @Override
         protected void onProgressUpdate(String... imagem) {
             img_perfil.setImageBitmap(decodeBase64(imagem[0]));
-            //img_perfil.setVisibility(View.VISIBLE);
-
         }
     }
 
