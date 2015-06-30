@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
@@ -14,6 +16,7 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -36,7 +39,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-import ext.sigaa.ldz.sigaaextreme.Adapters.TurmasAdapter;
+import ext.sigaa.ldz.sigaaextreme.Adapters.ListaTurmasAdapter;
+import ext.sigaa.ldz.sigaaextreme.Adapters.TurmaAdapter;
 import ext.sigaa.ldz.sigaaextreme.Objetos.Aula;
 import ext.sigaa.ldz.sigaaextreme.Objetos.DetalhesTurma;
 import ext.sigaa.ldz.sigaaextreme.Objetos.Turma;
@@ -53,7 +57,7 @@ public class Main extends ActionBarActivity {
         {
             //txt_html.setText(html);
             //Log.e("HTML", html);
-            if (pagina == PaginaAtual.LOGIN && !comErro)
+            if (!comErro)
                 new VerificaErros().executeOnExecutor(Executors.newFixedThreadPool(4), html);
             if (pagina == PaginaAtual.PORTAL_DISCENTE && txt_nome == null) {
                 new CarregaDadosPerfil().executeOnExecutor(Executors.newFixedThreadPool(4), html);
@@ -81,7 +85,7 @@ public class Main extends ActionBarActivity {
     SharedPreferences dadosSalvos;
     SharedPreferences.Editor editor;
     LayoutInflater layoutInflater;
-    View vw_login, vw_perfil;
+    View vw_login, vw_perfil, vw_turma;
     List<Turma> minhasTurmas;
     int posicaoTurmaSelecionada;
     //OBJETOS LOGIN
@@ -93,6 +97,10 @@ public class Main extends ActionBarActivity {
     ImageView img_perfil;
     IconRoundCornerProgressBar pgr_percentual;
     ListView lst_turmas;
+    //OBJETOS TURMA
+    TextView txt_nomeTurma;
+    ListView lst_aulas;
+    ImageView img_voltar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,7 +157,7 @@ public class Main extends ActionBarActivity {
                         web.loadUrl("https://www.sigaa.ufs.br/sigaa/verPortalDiscente.do");
 
                     } else {
-                        if (url.contains("discente.jsf")) {
+                        if (url.contains("docente.jsf") || url.contains("discente.jsf")) {
 
                             if (pagina != PaginaAtual.PORTAL_DISCENTE) {
                                 pagina = PaginaAtual.PORTAL_DISCENTE;
@@ -240,6 +248,23 @@ public class Main extends ActionBarActivity {
         txt_percentual = (TextView) vw_perfil.findViewById(R.id.txt_percentual);
         pgr_percentual = (IconRoundCornerProgressBar) vw_perfil.findViewById(R.id.pgr_percentual);
         lst_turmas = (ListView) vw_perfil.findViewById(R.id.lst_turmas);
+
+    }
+
+    private void constroiObjetosTurma()
+    {
+        txt_nomeTurma = (TextView) vw_turma.findViewById(R.id.txt_nomeTurma);
+        lst_aulas = (ListView) vw_turma.findViewById(R.id.lst_aulas);
+        img_voltar = (ImageView) vw_turma.findViewById(R.id.img_voltar);
+
+
+        img_voltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                area_geral.removeViewAt(2);
+                web.loadUrl("https://www.sigaa.ufs.br/sigaa/verPortalDiscente.do");            }
+        });
+
 
     }
 
@@ -467,7 +492,7 @@ public class Main extends ActionBarActivity {
         @Override
         protected void onProgressUpdate(String... dadosPerfil) {
 
-            TurmasAdapter adapter = new TurmasAdapter(Main.this,minhasTurmas);
+            ListaTurmasAdapter adapter = new ListaTurmasAdapter(Main.this,minhasTurmas);
             lst_turmas.setAdapter(adapter);
 
             int totalHeight = 0;
@@ -490,6 +515,8 @@ public class Main extends ActionBarActivity {
                     ArrayList<String> scripts = new ArrayList<String>();
                     scripts.add("jsfcljs(document.forms['"+minhasTurmas.get(i).idForm+"'],'"+minhasTurmas.get(i).idForm+":turmaVirtual,"+minhasTurmas.get(i).idForm+":turmaVirtual','');");
                     executaScripts(scripts);
+
+                    ExibeDialog("Entrando...", false, false, R.drawable.entrando, true);
                 }
             });
 
@@ -571,15 +598,42 @@ public class Main extends ActionBarActivity {
 
                 }
             }
-            else
+            else {
+                publishProgress();
                 return false;
+            }
+            publishProgress();
 
             return true;
         }
         @Override
         protected void onProgressUpdate(String... dadosPerfil) {
+            vw_turma = layoutInflater.inflate(R.layout.turma, area_geral);
 
+            constroiObjetosTurma();
+            dialogo.dismiss();
+            txt_nomeTurma.setText(minhasTurmas.get(posicaoTurmaSelecionada).descricao);
+            TurmaAdapter adapter = new TurmaAdapter(Main.this,minhasTurmas.get(posicaoTurmaSelecionada).aulas);
+            lst_aulas.setAdapter(adapter);
 
+            int totalHeight = 0;
+            for (int i = 0; i < adapter.getCount(); i++) {
+                View listItem = adapter.getView(i, null, lst_turmas);
+                listItem.measure(0, 0);
+                totalHeight += listItem.getMeasuredHeight();
+            }
+
+            ViewGroup.LayoutParams params = lst_aulas.getLayoutParams();
+            params.height = totalHeight + (lst_aulas.getDividerHeight() * (adapter.getCount() - 1));
+            lst_aulas.setLayoutParams(params);
+            lst_aulas.requestLayout();
+
+            lst_aulas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                }
+            });
         }
 
         protected Aula trataAula(String turma)
@@ -588,8 +642,8 @@ public class Main extends ActionBarActivity {
             int fimTopico =  turma.indexOf("<span");
             if (fimTopico != -1) {
                 retorno.topico = turma.substring(0, fimTopico - 26);
-                retorno.data_inicio = turma.substring(fimTopico + 1, fimTopico + 11);
-                retorno.data_fim = turma.substring(fimTopico + 13, fimTopico + 24);
+                retorno.data_inicio = turma.substring(fimTopico -25, fimTopico -15).trim();
+                retorno.data_fim = turma.substring(fimTopico - 13, fimTopico -2).trim();
             }
 
             int iniDescricao = turma.indexOf("class=\"conteudotopico\"");
@@ -619,6 +673,11 @@ public class Main extends ActionBarActivity {
                 codErro = 2;
                 publishProgress("Sem conexão com a internet!");
             }
+            if (html[0].contains("Acesso Negado!"))
+            {
+                codErro = 3;
+                publishProgress("Restrito a alunos!");
+            }
 
             return true;
         }
@@ -628,6 +687,11 @@ public class Main extends ActionBarActivity {
             {
                 case 1: ExibeDialog(mensagem[0], true, true, R.drawable.acessonegado, false); break;
                 case 2: ExibeDialog(mensagem[0], true, true, R.drawable.semrede, false); break;
+                case 3:
+                {
+                    ExibeDialog(mensagem[0], true, true, R.drawable.acessonegado, false);
+                    web.loadUrl("https://www.sigaa.ufs.br/sigaa/verTelaLogin.do");break;
+                }
 
                 default: break;
             }

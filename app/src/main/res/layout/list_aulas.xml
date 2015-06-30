@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/lnr_itemAula">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="10">
+
+        <ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/txt_dataAula"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_gravity="center"
+            android:text="DATA"
+            android:textSize="20sp"
+            android:maxLines="3"
+            android:textColor="#666666"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_marginTop="6dp"
+            android:layout_width="3dp"
+            android:layout_height="fill_parent"
+            android:background="#FFFFFF"/>
+
+
+        <ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/txt_topicoAula"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:layout_gravity="center"
+            android:text="TOPICO AULA"
+            android:textSize="20sp"
+            android:maxLines="3"
+            android:textColor="#666666"
+            android:gravity="center"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginRight="6dp"
+        android:layout_marginLeft="6dp"
+        android:layout_width="fill_parent"
+        android:layout_height="3dp"
+        android:background="#FFFFFF"/>
+
+
+    <ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/txt_descricaoAula"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="DESCRICAO AULA"
+        android:textSize="20sp"
+        android:maxLines="3"
+        android:textColor="#999999"
+        android:gravity="center"/>
+
+    <ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/txt_arquivos"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:maxLines="3"
+        android:textColor="#666666"
+        android:gravity="right"/>
+
+</LinearLayout>

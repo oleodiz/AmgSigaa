@@ -1,0 +1,83 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:background="#FFFFFF">
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            >
+
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:background="#80BBF0">
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/sigaa"
+                android:layout_gravity="center"/>
+
+            <ImageButton
+                android:src="@drawable/voltar"
+                android:layout_gravity="top|start"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/img_voltar"
+                android:clickable="true"
+                android:background="@null"/>
+
+        </FrameLayout>
+
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/background">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TURMA"
+                    android:id="@+id/txt_nomeTurma"
+                    android:textSize="20sp"
+                    android:textColor="#666666"
+                    android:textStyle="bold"
+                    android:maxLines="2"
+                    android:gravity="center"
+                    />
+
+                <ListView
+                    android:id="@+id/lst_aulas"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+
+                </ListView>
+
+
+            </LinearLayout>
+
+
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</merge>

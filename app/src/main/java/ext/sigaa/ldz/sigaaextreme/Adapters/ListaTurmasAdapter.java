@@ -20,13 +20,13 @@ import ext.sigaa.ldz.sigaaextreme.R;
 /**
  * Created by Leonardo on 28/06/2015.
  */
-public class TurmasAdapter extends BaseAdapter {
+public class ListaTurmasAdapter extends BaseAdapter {
     List<Turma> turmas;
     Context context;
     private static LayoutInflater inflater = null;
     LinearLayout.LayoutParams params;
 
-    public TurmasAdapter(Context contx, List<Turma> turmas) {
+    public ListaTurmasAdapter(Context contx, List<Turma> turmas) {
         this.turmas = turmas;
         context = contx;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
