@@ -10,6 +10,9 @@ import ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView;
  */
 public class Aula {
     public String topico;
+    public String descricao;
+    public String data_inicio;
+    public String data_fim;
     public List<Arquivo> arquivos;
 
     public Aula()

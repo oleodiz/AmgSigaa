@@ -58,6 +58,9 @@ public class Main extends ActionBarActivity {
             if (pagina == PaginaAtual.PORTAL_DISCENTE && txt_nome == null) {
                 new CarregaDadosPerfil().executeOnExecutor(Executors.newFixedThreadPool(4), html);
             }
+            if (pagina == PaginaAtual.TURMA) {
+                new CarregaTurma().executeOnExecutor(Executors.newFixedThreadPool(4), html);
+            }
             //if (pagina == PaginaAtual.PORTAL_DISCENTE)
             //    processaImagem();
         }
@@ -102,6 +105,7 @@ public class Main extends ActionBarActivity {
         editor = dadosSalvos.edit();
         comErro = false;
         dialogo= NiftyDialogBuilder.getInstance(this);
+        posicaoTurmaSelecionada=-1;
 
         web.getSettings().setJavaScriptEnabled(true);
         web.getSettings().setDomStorageEnabled(true);
@@ -149,9 +153,10 @@ public class Main extends ActionBarActivity {
 
                             if (pagina != PaginaAtual.PORTAL_DISCENTE) {
                                 pagina = PaginaAtual.PORTAL_DISCENTE;
-
-                                //podeProcessar = false;
                             }
+                            else
+                                if (posicaoTurmaSelecionada != -1)
+                                    pagina = PaginaAtual.TURMA;
                         } else {
                             pagina = PaginaAtual.LOGIN;
                         }
@@ -481,7 +486,7 @@ public class Main extends ActionBarActivity {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
                 {
-                    posicaoTurmaSelecionada =i;
+                    posicaoTurmaSelecionada = i;
                     ArrayList<String> scripts = new ArrayList<String>();
                     scripts.add("jsfcljs(document.forms['"+minhasTurmas.get(i).idForm+"'],'"+minhasTurmas.get(i).idForm+":turmaVirtual,"+minhasTurmas.get(i).idForm+":turmaVirtual','');");
                     executaScripts(scripts);
@@ -556,16 +561,14 @@ public class Main extends ActionBarActivity {
             if (inicioAulas != -1) {
                 aulas = new ArrayList<Aula>();
                 aul = html[0].substring(inicioAulas, html[0].indexOf("id=\"rodape\""));
-                int ini = aul.indexOf("class=\"titulo\"");
-                while (ini != -1)
+                int fim = aul.indexOf("class=\"titulo\"", 15);;
+                while (fim != -1)
                 {
-                    int fim = aul.indexOf("<span");
-                    if (fim != -1)
-                    {
-                        minhasTurmas.get(posicaoTurmaSelecionada).aulas.add(trataAula(aul.substring(ini, fim)));
-                        aul = aul.substring(fim);
-                        ini = aul.indexOf("class=\"titulo\"");
-                    }
+                    minhasTurmas.get(posicaoTurmaSelecionada).aulas.add(trataAula(aul.substring(15, fim)));
+
+                    aul = aul.substring(fim);
+                    fim = aul.indexOf("class=\"titulo\"", 15);
+
                 }
             }
             else
@@ -582,8 +585,16 @@ public class Main extends ActionBarActivity {
         protected Aula trataAula(String turma)
         {
             Aula retorno = new Aula();
+            int fimTopico =  turma.indexOf("<span");
+            if (fimTopico != -1) {
+                retorno.topico = turma.substring(0, fimTopico - 26);
+                retorno.data_inicio = turma.substring(fimTopico + 1, fimTopico + 11);
+                retorno.data_fim = turma.substring(fimTopico + 13, fimTopico + 24);
+            }
 
-
+            int iniDescricao = turma.indexOf("class=\"conteudotopico\"");
+            if (iniDescricao != -1)
+                retorno.descricao = turma.substring(iniDescricao+23, turma.indexOf("<div", iniDescricao+23));
             return retorno;
         }
 
