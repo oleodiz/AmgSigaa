@@ -1,4 +1,4 @@
-package ext.sigaa.ldz.sigaaextreme;
+package ext.sigaa.ldz.amgsigaa.Activitys;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -6,8 +6,6 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
@@ -16,7 +14,6 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -39,11 +36,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-import ext.sigaa.ldz.sigaaextreme.Adapters.ListaTurmasAdapter;
-import ext.sigaa.ldz.sigaaextreme.Adapters.TurmaAdapter;
-import ext.sigaa.ldz.sigaaextreme.Objetos.Aula;
-import ext.sigaa.ldz.sigaaextreme.Objetos.DetalhesTurma;
-import ext.sigaa.ldz.sigaaextreme.Objetos.Turma;
+import ext.sigaa.ldz.amgsigaa.Adapters.ListaTurmasAdapter;
+import ext.sigaa.ldz.amgsigaa.Adapters.TurmaAdapter;
+import ext.sigaa.ldz.amgsigaa.Objetos.Aula;
+import ext.sigaa.ldz.amgsigaa.Objetos.DetalhesTurma;
+import ext.sigaa.ldz.amgsigaa.Objetos.Notas;
+import ext.sigaa.ldz.amgsigaa.Objetos.Turma;
+import ext.sigaa.ldz.amgsigaa.Objetos.TurmaNota;
+import ext.sigaa.ldz.amgsigaa.R;
 
 /**
  * Created by Leonardo on 24/06/2015.
@@ -55,8 +55,6 @@ public class Main extends ActionBarActivity {
         @android.webkit.JavascriptInterface
         public void processHTML(String html)
         {
-            //txt_html.setText(html);
-            //Log.e("HTML", html);
             if (!comErro)
                 new VerificaErros().executeOnExecutor(Executors.newFixedThreadPool(4), html);
             if (pagina == PaginaAtual.PORTAL_DISCENTE && txt_nome == null) {
@@ -66,10 +64,8 @@ public class Main extends ActionBarActivity {
                 new CarregaTurma().executeOnExecutor(Executors.newFixedThreadPool(4), html);
             }
             if (pagina == PaginaAtual.NOTAS) {
-               // new CarregaTurma().executeOnExecutor(Executors.newFixedThreadPool(4), html);
+                new CarregaNotas().executeOnExecutor(Executors.newFixedThreadPool(4), html);
             }
-            //if (pagina == PaginaAtual.PORTAL_DISCENTE)
-            //    processaImagem();
         }
 
         @android.webkit.JavascriptInterface
@@ -91,6 +87,7 @@ public class Main extends ActionBarActivity {
     View vw_login, vw_perfil, vw_turma;
     List<Turma> minhasTurmas;
     int posicaoTurmaSelecionada;
+    int codErro;
     //OBJETOS LOGIN
     EditText edt_usuario, edt_senha;
     Button btn_entrar;
@@ -160,6 +157,7 @@ public class Main extends ActionBarActivity {
                         web.loadUrl("https://www.sigaa.ufs.br/sigaa/verPortalDiscente.do");
 
                     } else {
+                        if (pagina != PaginaAtual.NOTAS)
                         if (url.contains("docente.jsf") || url.contains("discente.jsf")) {
 
                             if (pagina != PaginaAtual.PORTAL_DISCENTE) {
@@ -230,6 +228,9 @@ public class Main extends ActionBarActivity {
                 editor.commit();
                 hideKeyboard();
                 ExibeDialog("Entrando...", false, false, R.drawable.entrando, true);
+
+                if(codErro == 2) ExibeDialog("Sem conexão com a internet!", true, true, R.drawable.semrede, false);
+                if(codErro == 4) ExibeDialog("Sistema em manutenção!", true, true, R.drawable.semrede, false);
             }
         });
 
@@ -668,13 +669,119 @@ public class Main extends ActionBarActivity {
 
     }
 
+    private class CarregaNotas extends AsyncTask<String, String, Boolean> {
+        @Override
+        protected Boolean doInBackground(String... html) {
+            List<Notas> notas;
+            String aux="";
+            int inicioNotas = html[0].indexOf("class=\"notas");
+
+            if (inicioNotas != -1) {
+                notas = new ArrayList<Notas>();
+                aux = html[0].substring(inicioNotas);
+                int inicioPeriodo = aux.indexOf("<caption>");
+                int fimPeriodo =0;
+                while (inicioPeriodo != -1)
+                {
+                    fimPeriodo = aux.indexOf("</table>")+10;
+                    notas.add(trataPeriodo(aux.substring(inicioPeriodo, fimPeriodo)));
+                    aux = aux.substring(fimPeriodo);
+                    inicioPeriodo = aux.indexOf("<caption>");
+                }
+            }
+            else {
+                publishProgress();
+                return false;
+            }
+            publishProgress();
+
+            return true;
+        }
+        @Override
+        protected void onProgressUpdate(String... dadosPerfil) {
+            //vw_turma = layoutInflater.inflate(R.layout.turma, area_geral);
+
+            //constroiObjetosTurma();
+            dialogo.dismiss();
+
+        }
+
+        protected Notas trataPeriodo(String periodo)
+        {
+            Notas retorno = new Notas();
+            retorno.periodo = periodo.substring(9,15);
+            int inicioTurma = periodo.indexOf("class=\"linha");
+            int fimTurma = 0;
+            while (inicioTurma !=-1)
+            {
+                fimTurma = periodo.indexOf("class=\"situacao\"",inicioTurma)+40;
+                retorno.turmas.add(trataNotas(periodo.substring(inicioTurma, fimTurma)));
+                periodo = periodo.substring(fimTurma);
+                inicioTurma = periodo.indexOf("class=\"linha");
+            }
+            return retorno;
+        }
+
+        protected TurmaNota trataNotas(String turma)
+        {
+            TurmaNota retorno = new TurmaNota();
+            int fimCodigo = turma.indexOf("</td>");
+            retorno.codigo = turma.substring(turma.indexOf("\"nowrap\"")+9,fimCodigo);
+            retorno.nome = turma.substring(turma.indexOf("#888")+ 7, turma.indexOf("</td>", fimCodigo+6));
+
+            int inicioNotas = turma.indexOf("class=\"nota\"");
+            int auxIniNota =0;
+            int auxFimNota =0;
+            if (inicioNotas !=-1)
+            {
+                auxIniNota = turma.indexOf("class=\"nota\"");
+                auxFimNota = turma.indexOf("</td>", auxIniNota);
+                retorno.notas[0] = turma.substring(turma.indexOf(">", auxIniNota)+1, auxFimNota).trim();
+
+                auxIniNota = turma.indexOf("class=\"nota\"", auxFimNota);
+                auxFimNota = turma.indexOf("</td>", auxIniNota);
+                retorno.notas[1] = turma.substring(turma.indexOf(">", auxIniNota)+1, auxFimNota).trim();
+
+                auxIniNota = turma.indexOf("class=\"nota\"", auxFimNota);
+                auxFimNota = turma.indexOf("</td>", auxIniNota);
+                retorno.notas[2] = turma.substring(turma.indexOf(">", auxIniNota)+1, auxFimNota).trim();
+
+                auxIniNota = turma.indexOf("class=\"nota\"", auxFimNota);
+                auxFimNota = turma.indexOf("</td>", auxIniNota);
+                retorno.notas[3] = turma.substring(turma.indexOf(">", auxIniNota)+1, auxFimNota).trim();
+
+                auxIniNota = turma.indexOf("class=\"nota\"", auxFimNota);
+                auxFimNota = turma.indexOf("</td>", auxIniNota);
+                retorno.notas[4] = turma.substring(turma.indexOf(">", auxIniNota)+1, auxFimNota).trim();
+
+                auxIniNota = turma.indexOf("class=\"nota\"", auxFimNota);
+                auxFimNota = turma.indexOf("</td>", auxIniNota);
+                retorno.notas[5] = turma.substring(turma.indexOf(">", auxIniNota)+1, auxFimNota).trim();
+
+                auxIniNota = turma.indexOf("class=\"nota\"", auxFimNota);
+                auxFimNota = turma.indexOf("</td>", auxIniNota);
+                retorno.media = turma.substring(turma.indexOf(">", auxIniNota)+1, auxFimNota).trim();
+
+                auxIniNota = turma.indexOf("class=\"nota\"", auxFimNota);
+                auxFimNota = turma.indexOf("</td>", auxIniNota);
+                retorno.faltas = turma.substring(turma.indexOf(">", auxIniNota)+1, auxFimNota).trim();
+
+                auxIniNota = turma.indexOf("class=\"situacao\"");
+                auxFimNota = turma.indexOf("</td>", auxIniNota);
+                retorno.resultado = turma.substring(auxIniNota+17, auxFimNota);
+            }
+            return retorno;
+        }
+
+    }
+
 
 
     private class VerificaErros extends AsyncTask<String, String, Boolean> {
-        int codErro =0;
+
         @Override
         protected Boolean doInBackground(String... html) {
-
+            codErro =0;
             if (html[0].contains("Usuário e/ou senha inválidos")) {
                 codErro =1;
                 publishProgress("Usuário e/ou senha inválidos!");
@@ -692,6 +799,11 @@ public class Main extends ActionBarActivity {
                 codErro = 3;
                 publishProgress("Restrito a alunos!");
             }
+            if (html[0].contains("Sistema em manutenção"))
+            {
+                codErro = 4;
+                publishProgress("Sistema em manutenção!");
+            }
 
             return true;
         }
@@ -701,6 +813,7 @@ public class Main extends ActionBarActivity {
             {
                 case 1: ExibeDialog(mensagem[0], true, true, R.drawable.acessonegado, false); break;
                 case 2: ExibeDialog(mensagem[0], true, true, R.drawable.semrede, false); break;
+                case 4: ExibeDialog(mensagem[0], true, true, R.drawable.semrede, false); break;
                 case 3:
                 {
                     ExibeDialog(mensagem[0], true, true, R.drawable.acessonegado, false);
@@ -709,7 +822,6 @@ public class Main extends ActionBarActivity {
 
                 default: break;
             }
-            codErro =0;
             comErro = true;
 
         }

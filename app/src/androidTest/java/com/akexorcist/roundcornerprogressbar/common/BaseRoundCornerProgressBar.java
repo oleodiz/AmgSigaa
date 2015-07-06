@@ -18,7 +18,7 @@ import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import ext.sigaa.ldz.sigaaextreme.R;
+import ext.sigaa.ldz.amgsigaa.R;
 
 /**
  * Created by Akexorcist on 5/16/15 AD.

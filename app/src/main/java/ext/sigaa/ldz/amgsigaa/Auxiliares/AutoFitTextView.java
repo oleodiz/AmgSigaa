@@ -1,4 +1,4 @@
-package ext.sigaa.ldz.sigaaextreme.Auxiliares;
+package ext.sigaa.ldz.amgsigaa.Auxiliares;
 
 import android.annotation.TargetApi;
 import android.content.Context;

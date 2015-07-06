@@ -40,7 +40,7 @@
                 android:layout_height="fill_parent"
                 android:orientation="vertical">
 
-                <ext.sigaa.ldz.sigaaextreme.Auxiliares.FontTextView
+                <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="Meu Amigo"
@@ -50,7 +50,7 @@
                     android:textStyle="bold"
                     />
 
-                <ext.sigaa.ldz.sigaaextreme.Auxiliares.FontTextView
+                <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="Sigaa"

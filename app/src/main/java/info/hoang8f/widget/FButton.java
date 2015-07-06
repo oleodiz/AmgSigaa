@@ -15,7 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
-import ext.sigaa.ldz.sigaaextreme.R;
+import ext.sigaa.ldz.amgsigaa.R;
 
 /**
  * Created by hoang8f on 5/5/14.

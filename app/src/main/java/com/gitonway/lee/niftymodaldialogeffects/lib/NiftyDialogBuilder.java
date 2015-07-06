@@ -1,6 +1,5 @@
 package com.gitonway.lee.niftymodaldialogeffects.lib;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,7 +8,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -22,7 +20,7 @@ import android.widget.TextView;
 
 import com.gitonway.lee.niftymodaldialogeffects.lib.effects.BaseEffects;
 
-import ext.sigaa.ldz.sigaaextreme.R;
+import ext.sigaa.ldz.amgsigaa.R;
 
 
 /*

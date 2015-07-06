@@ -1,4 +1,4 @@
-package ext.sigaa.ldz.sigaaextreme;
+package ext.sigaa.ldz.amgsigaa;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

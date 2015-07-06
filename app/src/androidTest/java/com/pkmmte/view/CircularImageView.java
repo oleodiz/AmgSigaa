@@ -23,7 +23,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
-import ext.sigaa.ldz.sigaaextreme.R;
+import ext.sigaa.ldz.amgsigaa.R;
 
 /**
  * Custom ImageView for circular images in Android while maintaining the

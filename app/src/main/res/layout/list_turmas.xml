@@ -6,7 +6,7 @@
     android:weightSum="5"
     android:id="@+id/lnr_itemTurma">
 
-    <ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView
+    <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
         android:id="@+id/txt_turma"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

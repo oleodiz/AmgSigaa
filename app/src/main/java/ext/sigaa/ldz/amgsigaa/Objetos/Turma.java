@@ -1,4 +1,4 @@
-package ext.sigaa.ldz.sigaaextreme.Objetos;
+package ext.sigaa.ldz.amgsigaa.Objetos;
 
 import java.util.ArrayList;
 import java.util.List;

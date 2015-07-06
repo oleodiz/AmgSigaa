@@ -1,4 +1,4 @@
-package ext.sigaa.ldz.sigaaextreme.Adapters;
+package ext.sigaa.ldz.amgsigaa.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -12,10 +12,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView;
-import ext.sigaa.ldz.sigaaextreme.Objetos.DetalhesTurma;
-import ext.sigaa.ldz.sigaaextreme.Objetos.Turma;
-import ext.sigaa.ldz.sigaaextreme.R;
+import ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView;
+import ext.sigaa.ldz.amgsigaa.Objetos.DetalhesTurma;
+import ext.sigaa.ldz.amgsigaa.Objetos.Turma;
+import ext.sigaa.ldz.amgsigaa.R;
 
 /**
  * Created by Leonardo on 28/06/2015.

@@ -1,9 +1,7 @@
-package ext.sigaa.ldz.sigaaextreme.Objetos;
+package ext.sigaa.ldz.amgsigaa.Objetos;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import ext.sigaa.ldz.sigaaextreme.Auxiliares.AutoFitTextView;
 
 /**
  * Created by Leonardo on 28/06/2015.
