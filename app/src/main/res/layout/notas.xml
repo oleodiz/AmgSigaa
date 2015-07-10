@@ -1,0 +1,82 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:background="#FFFFFF">
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            >
+
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:background="#80BBF0">
+
+            </LinearLayout>
+
+
+            <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="10dp"
+                android:text="Minhas Notas"
+                android:textSize="30sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:maxLines="2"
+                android:gravity="center"
+                />
+
+            <ImageButton
+                android:src="@drawable/voltar"
+                android:layout_gravity="top|start"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/img_voltar"
+                android:clickable="true"
+                android:background="@null"/>
+
+        </FrameLayout>
+
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:fillViewport="true"
+            android:background="@drawable/background">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+
+                <ListView
+                    android:id="@+id/lst_notas"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:smoothScrollbar="true"
+                    android:scrollingCache="false"
+                    android:animationCache="false">
+
+
+                </ListView>
+
+
+            </LinearLayout>
+
+
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</merge>

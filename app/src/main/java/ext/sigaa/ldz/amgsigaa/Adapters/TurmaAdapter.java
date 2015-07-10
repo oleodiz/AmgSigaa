@@ -57,38 +57,39 @@ public class TurmaAdapter extends BaseAdapter{
     public View getView(final int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
         Holder holder = new Holder();
-        View rowView;
-
-        rowView = inflater.inflate(R.layout.list_aulas, null);
-        holder.txt_dataAula = (TextView) rowView.findViewById(R.id.txt_dataAula);
-        holder.txt_arquivos = (TextView) rowView.findViewById(R.id.txt_arquivos);
-        holder.txt_descricaoAula = (TextView) rowView.findViewById(R.id.txt_descricaoAula);
-        holder.txt_topicoAula = (TextView) rowView.findViewById(R.id.txt_topicoAula);
-
-        holder.lnr_itemAula = (LinearLayout) rowView.findViewById(R.id.lnr_itemTurma);
-
-        if (aulas.get(position).data_inicio.equals(aulas.get(position).data_fim)) {
-            holder.txt_dataAula.setText(aulas.get(position).data_inicio);
-            holder.txt_dataAula.setMaxLines(1);
-        }else
-            holder.txt_dataAula.setText(aulas.get(position).data_inicio+"\n - \n"+aulas.get(position).data_fim);
-
-        if (aulas.get(position).arquivos.size() >0)
-            holder.txt_arquivos.setText(aulas.get(position).arquivos.size() +" arquivo(s)");
-        else
-            holder.txt_arquivos.setVisibility(View.GONE);
-
-        holder.txt_topicoAula.setText(aulas.get(position).topico);
-        if (aulas.get(position).descricao.equals(""))
-            holder.txt_descricaoAula.setVisibility(View.GONE);
-        else
-            holder.txt_descricaoAula.setText(aulas.get(position).descricao);
+        View rowView = convertView;
 
 
-        if (position % 2 == 0)
-            rowView.setBackgroundColor(Color.argb(255,205,238,248));
-        else
-            rowView.setBackgroundColor(Color.argb(255, 236, 249, 253));
+            rowView = inflater.inflate(R.layout.list_aulas, null);
+            holder.txt_dataAula = (TextView) rowView.findViewById(R.id.txt_dataAula);
+            holder.txt_arquivos = (TextView) rowView.findViewById(R.id.txt_arquivos);
+            holder.txt_descricaoAula = (TextView) rowView.findViewById(R.id.txt_descricaoAula);
+            holder.txt_topicoAula = (TextView) rowView.findViewById(R.id.txt_topicoAula);
+
+            holder.lnr_itemAula = (LinearLayout) rowView.findViewById(R.id.lnr_itemTurma);
+
+            if (aulas.get(position).data_inicio.equals(aulas.get(position).data_fim)) {
+                holder.txt_dataAula.setText(aulas.get(position).data_inicio);
+                holder.txt_dataAula.setMaxLines(1);
+            } else
+                holder.txt_dataAula.setText(aulas.get(position).data_inicio + "\n - \n" + aulas.get(position).data_fim);
+
+            if (aulas.get(position).arquivos.size() > 0)
+                holder.txt_arquivos.setText(aulas.get(position).arquivos.size() + " arquivo(s)");
+            else
+                holder.txt_arquivos.setVisibility(View.GONE);
+
+            holder.txt_topicoAula.setText(aulas.get(position).topico);
+            if (aulas.get(position).descricao.equals(""))
+                holder.txt_descricaoAula.setVisibility(View.GONE);
+            else
+                holder.txt_descricaoAula.setText(aulas.get(position).descricao);
+
+
+            if (position % 2 == 0)
+                rowView.setBackgroundColor(Color.argb(255, 205, 238, 248));
+            else
+                rowView.setBackgroundColor(Color.argb(255, 236, 249, 253));
 
         return rowView;
     }

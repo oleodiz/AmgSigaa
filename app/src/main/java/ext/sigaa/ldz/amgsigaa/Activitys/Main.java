@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 import ext.sigaa.ldz.amgsigaa.Adapters.ListaTurmasAdapter;
+import ext.sigaa.ldz.amgsigaa.Adapters.NotasAdapter;
 import ext.sigaa.ldz.amgsigaa.Adapters.TurmaAdapter;
 import ext.sigaa.ldz.amgsigaa.Objetos.Aula;
 import ext.sigaa.ldz.amgsigaa.Objetos.DetalhesTurma;
@@ -84,7 +85,7 @@ public class Main extends ActionBarActivity {
     SharedPreferences dadosSalvos;
     SharedPreferences.Editor editor;
     LayoutInflater layoutInflater;
-    View vw_login, vw_perfil, vw_turma;
+    View vw_login, vw_perfil, vw_turma, vw_notas;
     List<Turma> minhasTurmas;
     int posicaoTurmaSelecionada;
     int codErro;
@@ -100,7 +101,10 @@ public class Main extends ActionBarActivity {
     //OBJETOS TURMA
     TextView txt_nomeTurma;
     ListView lst_aulas;
-    ImageView img_voltar;
+    ImageView img_voltarT;
+    //OBJETOS NOTAS
+    ListView lst_notas;
+    ImageView img_voltarN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -229,7 +233,7 @@ public class Main extends ActionBarActivity {
                 hideKeyboard();
                 ExibeDialog("Entrando...", false, false, R.drawable.entrando, true);
 
-                if(codErro == 2) ExibeDialog("Sem conexão com a internet!", true, true, R.drawable.semrede, false);
+                if(codErro == 2) ExibeDialog("Conexão não estabelecida!", true, true, R.drawable.semrede, false);
                 if(codErro == 4) ExibeDialog("Sistema em manutenção!", true, true, R.drawable.semrede, false);
             }
         });
@@ -272,17 +276,31 @@ public class Main extends ActionBarActivity {
     {
         txt_nomeTurma = (TextView) vw_turma.findViewById(R.id.txt_nomeTurma);
         lst_aulas = (ListView) vw_turma.findViewById(R.id.lst_aulas);
-        img_voltar = (ImageView) vw_turma.findViewById(R.id.img_voltar);
+        img_voltarT = (ImageView) vw_turma.findViewById(R.id.img_voltar);
 
 
-        img_voltar.setOnClickListener(new View.OnClickListener() {
+        img_voltarT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 area_geral.removeViewAt(2);
-                web.loadUrl("https://www.sigaa.ufs.br/sigaa/verPortalDiscente.do");            }
+                web.loadUrl("https://www.sigaa.ufs.br/sigaa/verPortalDiscente.do");
+            }
         });
+    }
+
+    private void constroiObjetosNotas()
+    {
+        lst_notas = (ListView) vw_notas.findViewById(R.id.lst_notas);
+        img_voltarN = (ImageView) vw_notas.findViewById(R.id.img_voltar);
 
 
+        img_voltarN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                area_geral.removeViewAt(2);
+                web.loadUrl("https://www.sigaa.ufs.br/sigaa/verPortalDiscente.do");
+            }
+        });
     }
 
     @Override
@@ -670,9 +688,10 @@ public class Main extends ActionBarActivity {
     }
 
     private class CarregaNotas extends AsyncTask<String, String, Boolean> {
+        List<Notas> notas;
         @Override
         protected Boolean doInBackground(String... html) {
-            List<Notas> notas;
+
             String aux="";
             int inicioNotas = html[0].indexOf("class=\"notas");
 
@@ -699,10 +718,30 @@ public class Main extends ActionBarActivity {
         }
         @Override
         protected void onProgressUpdate(String... dadosPerfil) {
-            //vw_turma = layoutInflater.inflate(R.layout.turma, area_geral);
+            vw_notas = layoutInflater.inflate(R.layout.notas, area_geral);
 
-            //constroiObjetosTurma();
+            constroiObjetosNotas();
             dialogo.dismiss();
+
+            NotasAdapter adapter = new NotasAdapter(Main.this, new ArrayList<TurmaNota>());
+
+            if (notas != null && notas.size()>0)
+            for (int i=0; i< notas.size();i++) {
+                TurmaNota tn = new TurmaNota();
+                tn.codigo ="0";
+                tn.nome = notas.get(i).periodo;
+                adapter.addNota(tn);
+                adapter.addNotas(notas.get(i).turmas);
+            }
+            lst_notas.setAdapter(adapter);
+
+
+            lst_notas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                }
+            });
 
         }
 
@@ -737,26 +776,38 @@ public class Main extends ActionBarActivity {
                 auxIniNota = turma.indexOf("class=\"nota\"");
                 auxFimNota = turma.indexOf("</td>", auxIniNota);
                 retorno.notas[0] = turma.substring(turma.indexOf(">", auxIniNota)+1, auxFimNota).trim();
+                if (retorno.notas[0].equals(""))
+                    retorno.notas[0] = "-";
 
                 auxIniNota = turma.indexOf("class=\"nota\"", auxFimNota);
                 auxFimNota = turma.indexOf("</td>", auxIniNota);
                 retorno.notas[1] = turma.substring(turma.indexOf(">", auxIniNota)+1, auxFimNota).trim();
+                if (retorno.notas[1].equals(""))
+                    retorno.notas[1] = "-";
 
                 auxIniNota = turma.indexOf("class=\"nota\"", auxFimNota);
                 auxFimNota = turma.indexOf("</td>", auxIniNota);
                 retorno.notas[2] = turma.substring(turma.indexOf(">", auxIniNota)+1, auxFimNota).trim();
+                if (retorno.notas[2].equals(""))
+                    retorno.notas[2] = "-";
 
                 auxIniNota = turma.indexOf("class=\"nota\"", auxFimNota);
                 auxFimNota = turma.indexOf("</td>", auxIniNota);
                 retorno.notas[3] = turma.substring(turma.indexOf(">", auxIniNota)+1, auxFimNota).trim();
+                if (retorno.notas[3].equals(""))
+                    retorno.notas[3] = "-";
 
                 auxIniNota = turma.indexOf("class=\"nota\"", auxFimNota);
                 auxFimNota = turma.indexOf("</td>", auxIniNota);
                 retorno.notas[4] = turma.substring(turma.indexOf(">", auxIniNota)+1, auxFimNota).trim();
+                if (retorno.notas[4].equals(""))
+                    retorno.notas[4] = "-";
 
                 auxIniNota = turma.indexOf("class=\"nota\"", auxFimNota);
                 auxFimNota = turma.indexOf("</td>", auxIniNota);
                 retorno.notas[5] = turma.substring(turma.indexOf(">", auxIniNota)+1, auxFimNota).trim();
+                if (retorno.notas[5].equals(""))
+                    retorno.notas[5] = "-";
 
                 auxIniNota = turma.indexOf("class=\"nota\"", auxFimNota);
                 auxFimNota = turma.indexOf("</td>", auxIniNota);
@@ -792,7 +843,7 @@ public class Main extends ActionBarActivity {
                     || html[0].contains("Esta página da web não está disponível"))
             {
                 codErro = 2;
-                publishProgress("Sem conexão com a internet!");
+                publishProgress("Conexão não estabelecida!");
             }
             if (html[0].contains("Acesso Negado!"))
             {

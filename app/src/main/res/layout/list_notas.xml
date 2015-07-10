@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/lnr_itemNota">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="6">
+
+        <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/txt_codTurma"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_gravity="center"
+            android:text="CODIGO"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:textColor="#666666"
+            android:gravity="center"/>
+
+        <View
+            android:layout_marginEnd="3dp"
+            android:layout_marginTop="6dp"
+            android:layout_width="3dp"
+            android:layout_height="fill_parent"
+            android:background="#FFFFFF"/>
+
+
+        <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/txt_nomeTurma"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:layout_gravity="center"
+            android:text="TURMA"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:maxLines="2"
+            android:textColor="#666666"
+            android:gravity="center"/>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_marginRight="6dp"
+        android:layout_marginLeft="6dp"
+        android:layout_width="fill_parent"
+        android:layout_height="3dp"
+        android:background="#FFFFFF"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="6">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+        <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
+            android:layout_marginBottom="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="1ª"
+            android:textSize="20sp"
+            android:maxLines="1"
+            android:textColor="#666666"
+            android:gravity="center"/>
+
+            <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
+                android:id="@+id/txt_nota1"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="0,0"
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:textColor="#999999"
+                android:gravity="center"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="3dp"
+            android:layout_height="fill_parent"
+            android:background="#FFFFFF"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="2ª"
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:textColor="#666666"
+                android:gravity="center"/>
+
+            <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
+                android:id="@+id/txt_nota2"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="0,0"
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:textColor="#999999"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="fill_parent"
+            android:background="#FFFFFF"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="3ª"
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:textColor="#666666"
+                android:gravity="center"/>
+
+            <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
+                android:id="@+id/txt_nota3"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="0,0"
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:textColor="#999999"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="fill_parent"
+            android:background="#FFFFFF"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="4ª"
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:textColor="#666666"
+                android:gravity="center"/>
+
+            <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
+                android:id="@+id/txt_nota4"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="0,0"
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:textColor="#999999"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="3dp"
+            android:layout_height="fill_parent"
+            android:background="#FFFFFF"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="5ª"
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:textColor="#666666"
+                android:gravity="center"/>
+
+            <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
+                android:id="@+id/txt_nota5"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="0,0"
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:textColor="#999999"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="3dp"
+            android:layout_height="fill_parent"
+            android:background="#FFFFFF"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="6ª"
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:textColor="#666666"
+                android:gravity="center"/>
+
+            <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
+                android:id="@+id/txt_nota6"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="0,0"
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:textColor="#999999"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginRight="6dp"
+        android:layout_marginLeft="6dp"
+        android:layout_width="fill_parent"
+        android:layout_height="3dp"
+        android:background="#FFFFFF"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="3">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Faltas"
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:textColor="#666666"
+                android:gravity="center"/>
+
+            <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
+                android:id="@+id/txt_faltas"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="10"
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:textColor="#999999"
+                android:gravity="center"/>
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="3dp"
+            android:layout_height="fill_parent"
+            android:background="#FFFFFF"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Média"
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:textColor="#666666"
+                android:gravity="center"/>
+
+            <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
+                android:id="@+id/txt_media"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="0,0"
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:textColor="#999999"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="3dp"
+            android:layout_height="fill_parent"
+            android:background="#FFFFFF"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Resultado"
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:textColor="#666666"
+                android:gravity="center"/>
+
+            <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
+                android:id="@+id/txt_resultado"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="APRO"
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:textColor="#999999"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        </LinearLayout>
+
+</LinearLayout>

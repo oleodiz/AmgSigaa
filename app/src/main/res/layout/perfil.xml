@@ -8,8 +8,8 @@
 
         <FrameLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-            --android:background="#FFFFFF">
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF">
 
             <LinearLayout
                 android:layout_width="fill_parent"
