@@ -6,15 +6,13 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -42,7 +40,6 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 import ext.sigaa.ldz.amgsigaa.Adapters.ListaTurmasAdapter;
-import ext.sigaa.ldz.amgsigaa.Adapters.NotasAdapter;
 import ext.sigaa.ldz.amgsigaa.Adapters.PagerAdapter;
 import ext.sigaa.ldz.amgsigaa.Adapters.TurmaAdapter;
 import ext.sigaa.ldz.amgsigaa.Auxiliares.SlidingTabLayout;
@@ -365,7 +362,7 @@ public class Main extends FragmentActivity implements ActionBar.TabListener {
         byte[] decodedByte = Base64.decode(input, 0);
         Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
 
-        return Bitmap.createBitmap(bitmap, 0, 0, 100, 125);
+        return Bitmap.createBitmap(bitmap, 0, 0, 100, 100);
     }
 
     public void executaScripts(ArrayList<String> scripts)

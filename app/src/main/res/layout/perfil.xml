@@ -64,9 +64,9 @@
                     >
 
                     <com.pkmmte.view.CircularImageView
-                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp"
                         android:layout_width="100dp"
-                        android:layout_height="120dp"
+                        android:layout_height="100dp"
                         android:id="@+id/img_perfil"
                         android:layout_gravity="center"
                         android:gravity="center"

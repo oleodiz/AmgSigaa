@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="fill_parent"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
     <ScrollView
@@ -14,11 +15,11 @@
             android:layout_height="fill_parent"
             android:orientation="vertical">
 
-
             <ListView
                 android:id="@+id/lst_notas"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:smoothScrollbar="true"
                 android:scrollingCache="false"
                 android:animationCache="false"
@@ -30,4 +31,4 @@
     </ScrollView>
 
 
-</LinearLayout>
+</FrameLayout>

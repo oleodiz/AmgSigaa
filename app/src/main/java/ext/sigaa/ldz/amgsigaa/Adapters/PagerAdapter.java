@@ -6,9 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import ext.sigaa.ldz.amgsigaa.Auxiliares.TabNotaFragment;
+import ext.sigaa.ldz.amgsigaa.Fragments.TabNotaFragment;
 import ext.sigaa.ldz.amgsigaa.Objetos.Notas;
 
 /**
