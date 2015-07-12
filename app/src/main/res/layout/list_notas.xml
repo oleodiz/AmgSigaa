@@ -26,7 +26,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:maxLines="1"
-            android:textColor="#666666"
+            android:textColor="#999999"
             android:gravity="center"
             android:visibility="gone"/>
 
@@ -35,7 +35,7 @@
             android:layout_marginTop="6dp"
             android:layout_width="3dp"
             android:layout_height="fill_parent"
-            android:background="#E1E1E1"
+            android:background="#fff3f3f3"
             android:visibility="gone"/>
 
 
@@ -51,7 +51,7 @@
             android:textStyle="bold"
             android:textSize="30sp"
             android:maxLines="2"
-            android:textColor="#666666"
+            android:textColor="#999999"
             android:gravity="center"/>
 
 
@@ -62,7 +62,7 @@
         android:layout_marginLeft="6dp"
         android:layout_width="fill_parent"
         android:layout_height="3dp"
-        android:background="#E1E1E1"/>
+        android:background="#fff3f3f3"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -86,7 +86,7 @@
             android:text="1ª"
             android:textSize="20sp"
             android:maxLines="1"
-            android:textColor="#666666"
+            android:textColor="#999999"
             android:gravity="center"/>
 
             <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
@@ -98,14 +98,14 @@
                 android:text="0,0"
                 android:textSize="20sp"
                 android:maxLines="1"
-                android:textColor="#999999"
+                android:textColor="#ffc0c0c0"
                 android:gravity="center"/>
 
         </LinearLayout>
         <View
             android:layout_width="3dp"
             android:layout_height="fill_parent"
-            android:background="#E1E1E1"/>
+            android:background="#fff3f3f3"/>
 
         <LinearLayout
             android:orientation="vertical"
@@ -123,7 +123,7 @@
                 android:text="2ª"
                 android:textSize="20sp"
                 android:maxLines="1"
-                android:textColor="#666666"
+                android:textColor="#999999"
                 android:gravity="center"/>
 
             <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
@@ -135,7 +135,7 @@
                 android:text="0,0"
                 android:textSize="20sp"
                 android:maxLines="1"
-                android:textColor="#999999"
+                android:textColor="#ffc0c0c0"
                 android:gravity="center"/>
 
         </LinearLayout>
@@ -143,7 +143,7 @@
         <View
             android:layout_width="3dp"
             android:layout_height="fill_parent"
-            android:background="#E1E1E1"/>
+            android:background="#fff3f3f3"/>
 
         <LinearLayout
             android:orientation="vertical"
@@ -161,7 +161,7 @@
                 android:text="3ª"
                 android:textSize="20sp"
                 android:maxLines="1"
-                android:textColor="#666666"
+                android:textColor="#999999"
                 android:gravity="center"/>
 
             <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
@@ -173,7 +173,7 @@
                 android:text="0,0"
                 android:textSize="20sp"
                 android:maxLines="1"
-                android:textColor="#999999"
+                android:textColor="#ffc0c0c0"
                 android:gravity="center"/>
 
         </LinearLayout>
@@ -181,7 +181,7 @@
         <View
             android:layout_width="3dp"
             android:layout_height="fill_parent"
-            android:background="#E1E1E1"/>
+            android:background="#fff3f3f3"/>
 
         <LinearLayout
             android:orientation="vertical"
@@ -199,7 +199,7 @@
                 android:text="4ª"
                 android:textSize="20sp"
                 android:maxLines="1"
-                android:textColor="#666666"
+                android:textColor="#999999"
                 android:gravity="center"/>
 
             <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
@@ -211,7 +211,7 @@
                 android:text="0,0"
                 android:textSize="20sp"
                 android:maxLines="1"
-                android:textColor="#999999"
+                android:textColor="#ffc0c0c0"
                 android:gravity="center"/>
 
         </LinearLayout>
@@ -219,7 +219,7 @@
         <TextView
             android:layout_width="3dp"
             android:layout_height="fill_parent"
-            android:background="#E1E1E1"/>
+            android:background="#fff3f3f3"/>
 
         <LinearLayout
             android:orientation="vertical"
@@ -237,7 +237,7 @@
                 android:text="5ª"
                 android:textSize="20sp"
                 android:maxLines="1"
-                android:textColor="#666666"
+                android:textColor="#999999"
                 android:gravity="center"/>
 
             <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
@@ -249,7 +249,7 @@
                 android:text="0,0"
                 android:textSize="20sp"
                 android:maxLines="1"
-                android:textColor="#999999"
+                android:textColor="#ffc0c0c0"
                 android:gravity="center"/>
 
         </LinearLayout>
@@ -257,7 +257,7 @@
         <TextView
             android:layout_width="3dp"
             android:layout_height="fill_parent"
-            android:background="#E1E1E1"/>
+            android:background="#fff3f3f3"/>
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="0dp"
@@ -274,7 +274,7 @@
                 android:text="6ª"
                 android:textSize="20sp"
                 android:maxLines="1"
-                android:textColor="#666666"
+                android:textColor="#999999"
                 android:gravity="center"/>
 
             <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
@@ -286,7 +286,7 @@
                 android:text="0,0"
                 android:textSize="20sp"
                 android:maxLines="1"
-                android:textColor="#999999"
+                android:textColor="#ffc0c0c0"
                 android:gravity="center"/>
 
         </LinearLayout>
@@ -298,7 +298,7 @@
         android:layout_marginLeft="6dp"
         android:layout_width="fill_parent"
         android:layout_height="3dp"
-        android:background="#E1E1E1"/>
+        android:background="#fff3f3f3"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -322,7 +322,7 @@
                 android:text="Faltas"
                 android:textSize="20sp"
                 android:maxLines="1"
-                android:textColor="#666666"
+                android:textColor="#999999"
                 android:gravity="center"/>
 
             <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
@@ -334,14 +334,14 @@
                 android:text="10"
                 android:textSize="20sp"
                 android:maxLines="1"
-                android:textColor="#999999"
+                android:textColor="#ffc0c0c0"
                 android:gravity="center"/>
 
         </LinearLayout>
         <TextView
             android:layout_width="3dp"
             android:layout_height="fill_parent"
-            android:background="#E1E1E1"/>
+            android:background="#fff3f3f3"/>
 
         <LinearLayout
             android:orientation="vertical"
@@ -359,7 +359,7 @@
                 android:text="Média"
                 android:textSize="20sp"
                 android:maxLines="1"
-                android:textColor="#666666"
+                android:textColor="#999999"
                 android:gravity="center"/>
 
             <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
@@ -371,7 +371,7 @@
                 android:text="0,0"
                 android:textSize="20sp"
                 android:maxLines="1"
-                android:textColor="#999999"
+                android:textColor="#ffc0c0c0"
                 android:gravity="center"/>
 
         </LinearLayout>
@@ -379,7 +379,7 @@
         <TextView
             android:layout_width="3dp"
             android:layout_height="fill_parent"
-            android:background="#E1E1E1"/>
+            android:background="#fff3f3f3"/>
 
         <LinearLayout
             android:orientation="vertical"
@@ -397,7 +397,7 @@
                 android:text="Resultado"
                 android:textSize="20sp"
                 android:maxLines="1"
-                android:textColor="#666666"
+                android:textColor="#999999"
                 android:gravity="center"/>
 
             <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
@@ -411,7 +411,7 @@
                 android:text="APRO"
                 android:textSize="20sp"
                 android:maxLines="1"
-                android:textColor="#999999"
+                android:textColor="#ffc0c0c0"
                 android:gravity="center"/>
 
         </LinearLayout>
