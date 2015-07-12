@@ -63,7 +63,7 @@ public class NotasAdapter extends BaseAdapter {
     public class Holder {
         TextView periodo;
         TextView txt_codTurma, txt_nomeTurma,txt_nota1, txt_nota2, txt_nota3, txt_nota4, txt_nota5, txt_nota6, txt_faltas, txt_media,txt_resultado ;
-        LinearLayout lnr_itemNota;
+        //LinearLayout lnr_itemNota;
     }
 
     @Override
@@ -87,7 +87,7 @@ public class NotasAdapter extends BaseAdapter {
                 holder.txt_media = (TextView) rowView.findViewById(R.id.txt_media);
                 holder.txt_resultado = (TextView) rowView.findViewById(R.id.txt_resultado);
 
-                holder.lnr_itemNota = (LinearLayout) rowView.findViewById(R.id.lnr_itemNota);
+                //holder.lnr_itemNota = (LinearLayout) rowView.findViewById(R.id.lnr_itemNota);
             }
             else
             {
@@ -98,7 +98,6 @@ public class NotasAdapter extends BaseAdapter {
         }
         else
             holder = (Holder) convertView.getTag();
-
 
         if (!notas.get(position).codigo.equals("0")) {
             holder.txt_codTurma.setText(notas.get(position).codigo);
@@ -115,11 +114,6 @@ public class NotasAdapter extends BaseAdapter {
             holder.txt_nota5.setText(notas.get(position).notas[4]);
             holder.txt_nota6.setText(notas.get(position).notas[5]);
 
-
-            if (position % 2 == 0)
-                rowView.setBackgroundColor(Color.argb(255, 205, 238, 248));
-            else
-                rowView.setBackgroundColor(Color.argb(255, 236, 249, 253));
         }
         else
             holder.periodo.setText(notas.get(position).nome);

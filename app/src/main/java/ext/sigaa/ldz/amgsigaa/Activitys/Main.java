@@ -6,8 +6,13 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -38,7 +43,9 @@ import java.util.concurrent.Executors;
 
 import ext.sigaa.ldz.amgsigaa.Adapters.ListaTurmasAdapter;
 import ext.sigaa.ldz.amgsigaa.Adapters.NotasAdapter;
+import ext.sigaa.ldz.amgsigaa.Adapters.PagerAdapter;
 import ext.sigaa.ldz.amgsigaa.Adapters.TurmaAdapter;
+import ext.sigaa.ldz.amgsigaa.Auxiliares.SlidingTabLayout;
 import ext.sigaa.ldz.amgsigaa.Objetos.Aula;
 import ext.sigaa.ldz.amgsigaa.Objetos.DetalhesTurma;
 import ext.sigaa.ldz.amgsigaa.Objetos.Notas;
@@ -50,7 +57,22 @@ import ext.sigaa.ldz.amgsigaa.R;
  * Created by Leonardo on 24/06/2015.
  */
 
-public class Main extends ActionBarActivity {
+public class Main extends FragmentActivity implements ActionBar.TabListener {
+
+    @Override
+    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+    }
+
+    @Override
+    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+    }
+
+    @Override
+    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+    }
 
     class LoadListener{
         @android.webkit.JavascriptInterface
@@ -103,8 +125,10 @@ public class Main extends ActionBarActivity {
     ListView lst_aulas;
     ImageView img_voltarT;
     //OBJETOS NOTAS
-    ListView lst_notas;
     ImageView img_voltarN;
+    ViewPager pager;
+    PagerAdapter adapter;
+    SlidingTabLayout tabs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,8 +152,11 @@ public class Main extends ActionBarActivity {
         }
         web.addJavascriptInterface(new LoadListener(), "METODOS");
         web.setWebChromeClient(new WebChromeClient());
+        web.getSettings().setLoadsImagesAutomatically(false);
+        if (Build.VERSION.SDK_INT <= 18)
+            web.getSettings().setSavePassword(false);
 
-        web.loadUrl("https://www.sigaa.ufs.br/sigaa/verTelaLogin.do");
+        web.loadUrl("file:///android_asset/login.html");
         podeProcessar = true;
         pagina = PaginaAtual.LOGIN;
         layoutInflater = (LayoutInflater)
@@ -139,16 +166,6 @@ public class Main extends ActionBarActivity {
         constroiObjetosLogin();
 
         web.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-
-            @Override
-            public void onPageStarted(WebView view, String url,
-                                      Bitmap favicon) {
-            }
 
             public void onPageFinished(WebView view, String url) {
 
@@ -159,6 +176,7 @@ public class Main extends ActionBarActivity {
                     if (url.contains("verMenuPrincipal")) {
                         pagina = PaginaAtual.MENU_PRINCIPAL;
                         web.loadUrl("https://www.sigaa.ufs.br/sigaa/verPortalDiscente.do");
+                        web.getSettings().setLoadsImagesAutomatically(true);
 
                     } else {
                         if (pagina != PaginaAtual.NOTAS)
@@ -290,14 +308,16 @@ public class Main extends ActionBarActivity {
 
     private void constroiObjetosNotas()
     {
-        lst_notas = (ListView) vw_notas.findViewById(R.id.lst_notas);
+        //lst_notas = (ListView) vw_notas.findViewById(R.id.lst_notas);
         img_voltarN = (ImageView) vw_notas.findViewById(R.id.img_voltar);
-
+        pager = (ViewPager) vw_notas.findViewById(R.id.pager);
+        tabs = (SlidingTabLayout) vw_notas.findViewById(R.id.tabs);
 
         img_voltarN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 area_geral.removeViewAt(2);
+                pagina = PaginaAtual.PORTAL_DISCENTE;
                 web.loadUrl("https://www.sigaa.ufs.br/sigaa/verPortalDiscente.do");
             }
         });
@@ -688,7 +708,7 @@ public class Main extends ActionBarActivity {
     }
 
     private class CarregaNotas extends AsyncTask<String, String, Boolean> {
-        List<Notas> notas;
+        ArrayList<Notas> notas;
         @Override
         protected Boolean doInBackground(String... html) {
 
@@ -723,26 +743,16 @@ public class Main extends ActionBarActivity {
             constroiObjetosNotas();
             dialogo.dismiss();
 
-            NotasAdapter adapter = new NotasAdapter(Main.this, new ArrayList<TurmaNota>());
-
-            if (notas != null && notas.size()>0)
-            for (int i=0; i< notas.size();i++) {
-                TurmaNota tn = new TurmaNota();
-                tn.codigo ="0";
-                tn.nome = notas.get(i).periodo;
-                adapter.addNota(tn);
-                adapter.addNotas(notas.get(i).turmas);
-            }
-            lst_notas.setAdapter(adapter);
-
-
-            lst_notas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            adapter =  new PagerAdapter(getSupportFragmentManager(), notas,getApplicationContext());
+            pager.setAdapter(adapter);
+            tabs.setDistributeEvenly(true);
+            tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
                 @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+                public int getIndicatorColor(int position) {
+                    return getResources().getColor(R.color.text_color);
                 }
             });
-
+            tabs.setViewPager(pager);
         }
 
         protected Notas trataPeriodo(String periodo)

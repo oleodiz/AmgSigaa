@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/lnr_itemNota">
+    android:id="@+id/lnr_itemNota"
+    android:background="@drawable/fundo_card">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -24,14 +27,16 @@
             android:textStyle="bold"
             android:maxLines="1"
             android:textColor="#666666"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:visibility="gone"/>
 
         <View
             android:layout_marginEnd="3dp"
             android:layout_marginTop="6dp"
             android:layout_width="3dp"
             android:layout_height="fill_parent"
-            android:background="#FFFFFF"/>
+            android:background="#E1E1E1"
+            android:visibility="gone"/>
 
 
         <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
@@ -40,7 +45,7 @@
             android:id="@+id/txt_nomeTurma"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
+            android:layout_weight="6"
             android:layout_gravity="center"
             android:text="TURMA"
             android:textStyle="bold"
@@ -57,7 +62,7 @@
         android:layout_marginLeft="6dp"
         android:layout_width="fill_parent"
         android:layout_height="3dp"
-        android:background="#FFFFFF"/>
+        android:background="#E1E1E1"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -100,7 +105,7 @@
         <View
             android:layout_width="3dp"
             android:layout_height="fill_parent"
-            android:background="#FFFFFF"/>
+            android:background="#E1E1E1"/>
 
         <LinearLayout
             android:orientation="vertical"
@@ -138,7 +143,7 @@
         <View
             android:layout_width="3dp"
             android:layout_height="fill_parent"
-            android:background="#FFFFFF"/>
+            android:background="#E1E1E1"/>
 
         <LinearLayout
             android:orientation="vertical"
@@ -176,7 +181,7 @@
         <View
             android:layout_width="3dp"
             android:layout_height="fill_parent"
-            android:background="#FFFFFF"/>
+            android:background="#E1E1E1"/>
 
         <LinearLayout
             android:orientation="vertical"
@@ -214,7 +219,7 @@
         <TextView
             android:layout_width="3dp"
             android:layout_height="fill_parent"
-            android:background="#FFFFFF"/>
+            android:background="#E1E1E1"/>
 
         <LinearLayout
             android:orientation="vertical"
@@ -252,7 +257,7 @@
         <TextView
             android:layout_width="3dp"
             android:layout_height="fill_parent"
-            android:background="#FFFFFF"/>
+            android:background="#E1E1E1"/>
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="0dp"
@@ -293,7 +298,7 @@
         android:layout_marginLeft="6dp"
         android:layout_width="fill_parent"
         android:layout_height="3dp"
-        android:background="#FFFFFF"/>
+        android:background="#E1E1E1"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -336,7 +341,7 @@
         <TextView
             android:layout_width="3dp"
             android:layout_height="fill_parent"
-            android:background="#FFFFFF"/>
+            android:background="#E1E1E1"/>
 
         <LinearLayout
             android:orientation="vertical"
@@ -374,7 +379,7 @@
         <TextView
             android:layout_width="3dp"
             android:layout_height="fill_parent"
-            android:background="#FFFFFF"/>
+            android:background="#E1E1E1"/>
 
         <LinearLayout
             android:orientation="vertical"
