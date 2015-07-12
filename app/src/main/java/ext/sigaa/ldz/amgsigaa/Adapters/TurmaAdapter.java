@@ -84,13 +84,6 @@ public class TurmaAdapter extends BaseAdapter{
                 holder.txt_descricaoAula.setVisibility(View.GONE);
             else
                 holder.txt_descricaoAula.setText(aulas.get(position).descricao);
-
-
-            if (position % 2 == 0)
-                rowView.setBackgroundColor(Color.argb(255, 205, 238, 248));
-            else
-                rowView.setBackgroundColor(Color.argb(255, 236, 249, 253));
-
         return rowView;
     }
 }

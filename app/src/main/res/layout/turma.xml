@@ -1,33 +1,37 @@
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fbutton="http://schemas.android.com/apk/res-auto">
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
         android:layout_gravity="center_horizontal"
-        android:background="#FFFFFF">
+        android:background="#fff4f4f4">
 
         <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             >
-
-
-
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
                 android:background="#80BBF0">
 
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/sigaa"
-                android:layout_gravity="center"/>
+
+            <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="10dp"
+                android:id="@+id/txt_nomeTurma"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="Turma"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:maxLines="2"
+                android:gravity="center"
+                />
 
             <ImageButton
                 android:src="@drawable/voltar"
@@ -41,32 +45,25 @@
         </FrameLayout>
 
 
+
         <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="@drawable/background">
+            android:fillViewport="true"
+            android:background="#FFFFFF">
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:orientation="vertical">
 
-                <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TURMA"
-                    android:id="@+id/txt_nomeTurma"
-                    android:textSize="20sp"
-                    android:textColor="#666666"
-                    android:textStyle="bold"
-                    android:maxLines="2"
-                    android:gravity="center"
-                    />
+
 
                 <ListView
                     android:id="@+id/lst_aulas"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:dividerHeight="10sp">
 
 
                 </ListView>

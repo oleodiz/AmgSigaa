@@ -22,14 +22,14 @@
             android:text="DATA"
             android:textSize="20sp"
             android:maxLines="3"
-            android:textColor="#666666"
+            android:textColor="#999999"
             android:gravity="center"/>
 
         <TextView
             android:layout_marginTop="6dp"
             android:layout_width="3dp"
             android:layout_height="fill_parent"
-            android:background="#FFFFFF"/>
+            android:background="#fff3f3f3"/>
 
 
         <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
@@ -43,7 +43,7 @@
             android:text="TOPICO AULA"
             android:textSize="20sp"
             android:maxLines="3"
-            android:textColor="#666666"
+            android:textColor="#999999"
             android:gravity="center"/>
 
 
@@ -54,7 +54,7 @@
         android:layout_marginLeft="6dp"
         android:layout_width="fill_parent"
         android:layout_height="3dp"
-        android:background="#FFFFFF"/>
+        android:background="#fff3f3f3"/>
 
 
     <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
@@ -67,7 +67,7 @@
         android:text="DESCRICAO AULA"
         android:textSize="20sp"
         android:maxLines="3"
-        android:textColor="#999999"
+        android:textColor="#ffc0c0c0"
         android:gravity="center"/>
 
     <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
@@ -79,7 +79,7 @@
         android:layout_gravity="center"
         android:textSize="20sp"
         android:maxLines="3"
-        android:textColor="#666666"
+        android:textColor="#999999"
         android:gravity="right"/>
 
 </LinearLayout>

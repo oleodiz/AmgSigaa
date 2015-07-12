@@ -168,9 +168,10 @@ public class LineChartFragment extends Fragment {
                 .setXLabels(AxisController.LabelPosition.OUTSIDE)
                 .setYLabels(AxisController.LabelPosition.OUTSIDE)
                 .setLabelsColor(Color.parseColor("#FF8E9196"))
+                .setFontSize(12)
                 .setXAxis(false)
                 .setYAxis(false)
-                .setStep(2)
+                .setStep(1)
                 .setBorderSpacing(Tools.fromDpToPx(5))
                 .setGrid(ChartView.GridType.VERTICAL, gridPaint);
 

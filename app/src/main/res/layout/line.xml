@@ -22,11 +22,13 @@
 
 
         <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="10dp"
             android:id="@+id/txt_nomeTurma"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:text="TURMA"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:maxLines="2"

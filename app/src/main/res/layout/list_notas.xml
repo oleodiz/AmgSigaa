@@ -5,8 +5,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/lnr_itemNota"
-    android:background="@drawable/fundo_card">
+    android:id="@+id/lnr_itemNota">
 
     <LinearLayout
         android:orientation="horizontal"

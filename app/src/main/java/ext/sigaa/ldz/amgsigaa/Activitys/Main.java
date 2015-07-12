@@ -566,7 +566,7 @@ public class Main extends FragmentActivity implements ActionBar.TabListener {
                     scripts.add("jsfcljs(document.forms['"+minhasTurmas.get(i).idForm+"'],'"+minhasTurmas.get(i).idForm+":turmaVirtual,"+minhasTurmas.get(i).idForm+":turmaVirtual','');");
                     executaScripts(scripts);
 
-                    ExibeDialog("Entrando...", false, false, R.drawable.entrando, true);
+                    ExibeDialog("Acessando turma...", false, false, R.drawable.entrando, true);
                 }
             });
 
@@ -869,18 +869,28 @@ public class Main extends FragmentActivity implements ActionBar.TabListener {
         protected void onProgressUpdate(String... mensagem) {
             switch (codErro)
             {
-                case 1: ExibeDialog(mensagem[0], true, true, R.drawable.acessonegado, false); break;
-                case 2: ExibeDialog(mensagem[0], true, true, R.drawable.semrede, false); break;
-                case 4: ExibeDialog(mensagem[0], true, true, R.drawable.semrede, false); break;
+                case 1:{
+                    ExibeDialog(mensagem[0], true, true, R.drawable.acessonegado, false);
+                     break;
+                }
+                case 2:{
+                    ExibeDialog(mensagem[0], true, true, R.drawable.semrede, false);
+                    break;
+                }
                 case 3:
                 {
                     ExibeDialog(mensagem[0], true, true, R.drawable.acessonegado, false);
-                    web.loadUrl("https://www.sigaa.ufs.br/sigaa/verTelaLogin.do");break;
+                    break;
                 }
-
+                case 4:
+                {
+                    ExibeDialog(mensagem[0], true, true, R.drawable.semrede, false);
+                    break;
+                }
                 default: break;
             }
-            comErro = true;
+            web.loadUrl("file:///android_asset/login.html");
+        comErro = true;
 
         }
     }

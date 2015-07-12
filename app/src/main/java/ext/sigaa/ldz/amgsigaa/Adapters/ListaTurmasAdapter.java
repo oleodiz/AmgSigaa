@@ -93,11 +93,6 @@ public class ListaTurmasAdapter extends BaseAdapter {
             holder.lnr_areaDetalhesTurma.addView(local);
         }
 
-        if (position % 2 == 0)
-            rowView.setBackgroundColor(Color.argb(255,205,238,248));
-        else
-            rowView.setBackgroundColor(Color.argb(255, 236, 249, 253));
-
         return rowView;
     }
 }

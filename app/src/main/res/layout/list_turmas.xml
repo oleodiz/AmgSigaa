@@ -15,7 +15,7 @@
         android:text="NOME DA TURMA"
         android:textSize="20sp"
         android:maxLines="2"
-        android:textColor="#666666"
+        android:textColor="#999999"
         android:gravity="center"/>
 
     <TextView
@@ -23,7 +23,7 @@
         android:layout_marginBottom="6dp"
         android:layout_width="3dp"
         android:layout_height="fill_parent"
-        android:background="#FFFFFF"/>
+        android:background="#E1E1E1"/>
 
     <LinearLayout
         android:id="@+id/lnr_areaDetalhesTurma"

@@ -497,7 +497,8 @@
                     android:id="@+id/lnr_areaTurmas"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:background="#FFFFFF">
 
                     <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
                         android:layout_marginTop="10dp"
@@ -513,8 +514,8 @@
                     <ListView
                         android:id="@+id/lst_turmas"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content">
-
+                        android:layout_height="wrap_content"
+                        android:dividerHeight="5sp">
 
                     </ListView>
 
