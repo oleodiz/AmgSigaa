@@ -13,10 +13,14 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.db.chart.Tools;
+import com.db.chart.model.BarSet;
 import com.db.chart.model.LineSet;
 import com.db.chart.view.AxisController;
+import com.db.chart.view.BarChartView;
 import com.db.chart.view.ChartView;
 import com.db.chart.view.LineChartView;
+import com.db.chart.view.XController;
+import com.db.chart.view.YController;
 import com.db.chart.view.animation.Animation;
 
 import ext.sigaa.ldz.amgsigaa.R;
@@ -24,17 +28,16 @@ import ext.sigaa.ldz.amgsigaa.R;
 /**
  * Created by leoss on 12/07/2015.
  */
-public class LineChartFragment extends Fragment {
+public class BarChartFragment extends Fragment {
 
 
     /** First chart */
-    private LineChartView mChartOne;
-    private ImageButton mPlayOne, img_voltar;
+    private BarChartView mChartOne;
+    public static ImageButton mPlayOne, img_voltar;
     private TextView txt_nomeTurma;
     private boolean mUpdateOne;
     private String[] mLabelsOne= {"1Uni.",  "2Uni.", "3Uni.", "4Uni.", "5Uni.", "6Uni."};
     private Float[] mValuesOne = {7.0f, 3.5f, 4.7f, 9.0f, 6.5f, 8.3f};
-    private Float[] mValuesAvg = {5.0f,5.0f,5.0f,5.0f,5.0f,5.0f};
     String nomeTurma;
 
     Fragment context;
@@ -45,12 +48,11 @@ public class LineChartFragment extends Fragment {
 
         context = this;
     }
-    public void setValues(String nomeTurma, String[] mLabelsOne, Float[] mValuesOne, Float[] mValuesAvg)
+    public void setValues(String nomeTurma, String[] mLabelsOne, Float[] mValuesOne)
     {
         this.mLabelsOne = mLabelsOne;
         this.mValuesOne = mValuesOne;
         this.nomeTurma = nomeTurma;
-        this.mValuesAvg = mValuesAvg;
     }
 
     @Override
@@ -68,12 +70,13 @@ public class LineChartFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 getFragmentManager().beginTransaction().remove(context).commit();
+                img_voltar=null;
             }
         });
 
         // Init first chart
         mUpdateOne = true;
-        mChartOne = (LineChartView) layout.findViewById(R.id.linechart1);
+        mChartOne = (BarChartView) layout.findViewById(R.id.barchart1);
 
         showChart(0, mChartOne, mPlayOne);
         return layout;
@@ -85,7 +88,7 @@ public class LineChartFragment extends Fragment {
      * @param chart   Chart view
      * @param btn    Play button
      */
-    private void showChart(final int tag, final LineChartView chart, final ImageButton btn){
+    private void showChart(final int tag, final BarChartView chart, final ImageButton btn){
         dismissPlay(btn);
         Runnable action =  new Runnable() {
             @Override
@@ -141,24 +144,19 @@ public class LineChartFragment extends Fragment {
      *
      */
 
-    public void produceOne(LineChartView chart, Runnable action){
+    public void produceOne(BarChartView chart, Runnable action){
 
-        LineSet dataset = new LineSet(mLabelsOne, mValuesOne);
-        dataset.setColor(Color.parseColor("#80BBF0"))
-                .setDotsStrokeThickness(Tools.fromDpToPx(4))
-                .setDotsStrokeColor(Color.parseColor("#80BBF0"))
-                .setDotsColor(Color.parseColor("#FFFFFF"));
-        chart.addData(dataset);
+        BarSet databar = new BarSet(mLabelsOne, mValuesOne);
+        databar.setColor(Color.parseColor("#80BBF0"));
 
-        dataset = new LineSet(mLabelsOne, mValuesAvg);
-        dataset.setColor(Color.parseColor("#ffc0c0c0"))
-                .setThickness(Tools.fromDpToPx(3))
-                .setDashed(new float[]{5, 5});
-        chart.addData(dataset);
+        chart.addData(databar);
 
+        chart.setSetSpacing(Tools.fromDpToPx(-15));
+        chart.setBarSpacing(Tools.fromDpToPx(35));
+        chart.setRoundCorners(Tools.fromDpToPx(2));
 
         Paint gridPaint = new Paint();
-        gridPaint.setColor(Color.parseColor("#ffc0c0c0"));
+        gridPaint.setColor(Color.parseColor("#c0c0c0"));
         gridPaint.setStyle(Paint.Style.STROKE);
         gridPaint.setAntiAlias(true);
         gridPaint.setStrokeWidth(Tools.fromDpToPx(1f));
@@ -167,13 +165,13 @@ public class LineChartFragment extends Fragment {
                 .setAxisBorderValues(0, 10, 1)
                 .setXLabels(AxisController.LabelPosition.OUTSIDE)
                 .setYLabels(AxisController.LabelPosition.OUTSIDE)
-                .setLabelsColor(Color.parseColor("#FF8E9196"))
+                .setLabelsColor(Color.parseColor("#8E9196"))
                 .setFontSize(12)
-                .setXAxis(false)
                 .setYAxis(false)
+                .setAxisColor(Color.parseColor("#86705c"))
                 .setStep(1)
-                .setBorderSpacing(Tools.fromDpToPx(5))
-                .setGrid(ChartView.GridType.VERTICAL, gridPaint);
+                        .setBorderSpacing(Tools.fromDpToPx(5))
+                        .setGrid(ChartView.GridType.FULL, gridPaint);
 
         Animation anim = new Animation().setEndAction(action);
 

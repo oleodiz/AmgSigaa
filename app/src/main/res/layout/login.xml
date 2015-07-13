@@ -59,6 +59,15 @@
                     android:layout_gravity="center"
                     android:textStyle="bold"
                     />
+                <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Acesse com seu usuário e senha do Sigaa"
+                    android:textSize="14sp"
+                    android:textColor="#999999"
+                    />
 
                 <LinearLayout
                     android:layout_marginLeft="20dp"
@@ -69,6 +78,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:background="@drawable/borda">
+
 
 
                     <EditText

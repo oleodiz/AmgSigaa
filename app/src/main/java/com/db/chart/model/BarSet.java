@@ -31,7 +31,7 @@ public class BarSet extends ChartSet{
 		super();
 	}
 
-    public BarSet(String[] labels, float[] values){
+    public BarSet(String[] labels, Float[] values){
         super();
 
         if(labels.length != values.length)

@@ -45,22 +45,22 @@ public class TabNotaFragment extends Fragment {
                 if (savedInstanceState == null) {
                     ArrayList<String> unidades = new ArrayList<String>();
                     ArrayList<Float> notasF = new ArrayList<Float>();
-                    ArrayList<Float> mediaF = new ArrayList<Float>();
 
                     for (int n = 0; n < notas.turmas.get(i).notas.length; n++) {
                         if (notas.turmas.get(i).notas[n].equals("-"))
                             break;
                         unidades.add((n + 1) + "Uni.");
                         notasF.add(Float.parseFloat(notas.turmas.get(i).notas[n].replace(",",".")));
-                        mediaF.add(Float.parseFloat(notas.turmas.get(i).media.replace(",", ".")));
                     }
 
                     if (notasF.size() > 1) {
-                        LineChartFragment grafico = new LineChartFragment();
+                        unidades.add("Media.");
+                        notasF.add(Float.parseFloat(notas.turmas.get(i).media.replace(",", ".")));
+
+                        BarChartFragment grafico = new BarChartFragment();
                         grafico.setValues(notas.turmas.get(i).nome,
                                 unidades.toArray(new String[unidades.size()]),
-                                notasF.toArray(new Float[notasF.size()]),
-                                mediaF.toArray(new Float[mediaF.size()]));
+                                notasF.toArray(new Float[notasF.size()]));
 
                         FragmentTransaction ft = getFragmentManager().beginTransaction();
                         ft.add(android.R.id.content, grafico).commit();

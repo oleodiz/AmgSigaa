@@ -43,6 +43,7 @@ import ext.sigaa.ldz.amgsigaa.Adapters.ListaTurmasAdapter;
 import ext.sigaa.ldz.amgsigaa.Adapters.PagerAdapter;
 import ext.sigaa.ldz.amgsigaa.Adapters.TurmaAdapter;
 import ext.sigaa.ldz.amgsigaa.Auxiliares.SlidingTabLayout;
+import ext.sigaa.ldz.amgsigaa.Fragments.BarChartFragment;
 import ext.sigaa.ldz.amgsigaa.Objetos.Aula;
 import ext.sigaa.ldz.amgsigaa.Objetos.DetalhesTurma;
 import ext.sigaa.ldz.amgsigaa.Objetos.Notas;
@@ -150,6 +151,8 @@ public class Main extends FragmentActivity implements ActionBar.TabListener {
         web.addJavascriptInterface(new LoadListener(), "METODOS");
         web.setWebChromeClient(new WebChromeClient());
         web.getSettings().setLoadsImagesAutomatically(false);
+        web.getSettings().setAllowFileAccess(true);
+        web.getSettings().setAllowFileAccessFromFileURLs(true);
         if (Build.VERSION.SDK_INT <= 18)
             web.getSettings().setSavePassword(false);
 
@@ -162,11 +165,12 @@ public class Main extends FragmentActivity implements ActionBar.TabListener {
         //area_geral.addView(vw_login);
         constroiObjetosLogin();
 
+
+
         web.setWebViewClient(new WebViewClient() {
 
             public void onPageFinished(WebView view, String url) {
 
-                if (podeProcessar) {
                     ArrayList<String> scripts = new ArrayList<String>();
                     scripts.add("window.METODOS.processHTML(document.getElementsByTagName('html')[0].innerHTML);");
                     executaScripts(scripts);
@@ -189,7 +193,7 @@ public class Main extends FragmentActivity implements ActionBar.TabListener {
                             pagina = PaginaAtual.LOGIN;
                         }
                     }
-                }
+
             }
         });
     }
@@ -216,7 +220,6 @@ public class Main extends FragmentActivity implements ActionBar.TabListener {
     }
 
     private void hideKeyboard() {
-        // Check if no view has focus:
         View view = this.getCurrentFocus();
         if (view != null) {
             InputMethodManager inputManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -280,7 +283,7 @@ public class Main extends FragmentActivity implements ActionBar.TabListener {
                 ExibeDialog("Acessando Notas...", false, false, R.drawable.entrando, true);
 
                 ArrayList<String> scripts = new ArrayList<String>();
-                scripts.add("cmItemMouseUp($('td:contains(\"Horário Individual\"):first')[0].parentNode, 3);");
+                scripts.add("cmItemMouseUp($('td:contains(\"Minhas Notas\"):first')[0].parentNode, 3);");
                 executaScripts(scripts);
             }
         });
@@ -357,7 +360,7 @@ public class Main extends FragmentActivity implements ActionBar.TabListener {
         executaScripts(scripts);
     }
 
-    public static Bitmap decodeBase64(String input)
+    public Bitmap decodeBase64(String input)
     {
         byte[] decodedByte = Base64.decode(input, 0);
         Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
@@ -893,5 +896,20 @@ public class Main extends FragmentActivity implements ActionBar.TabListener {
         comErro = true;
 
         }
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        if(BarChartFragment.img_voltar!=null) {
+            BarChartFragment.img_voltar.callOnClick();
+            return;
+        }
+       if ( area_geral.getChildCount() >2)
+           area_geral.removeViewAt(area_geral.getChildCount()-1);
+        else
+       {
+           finish();
+       }
     }
 }

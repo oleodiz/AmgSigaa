@@ -505,7 +505,7 @@
                         android:singleLine="true"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:text="Turmas do semestre"
+                        android:text="Turmas do período"
                         android:textSize="25sp"
                         android:textColor="#666666"
                         android:layout_gravity="center" />
@@ -523,19 +523,65 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="20dp"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <TextView
+                    <View
                         android:layout_width="fill_parent"
                         android:layout_height="3dp"
                         android:background="#E1E1E1"/>
-                    <TextView
+                    <View
                         android:layout_width="fill_parent"
                         android:layout_height="10dp"
                         android:background="#fff3f3f3"/>
-                    <TextView
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="3dp"
+                        android:background="#E1E1E1"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="#FFFFFF">
+
+                    <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="Atividades"
+                        android:textSize="25sp"
+                        android:textColor="#666666"
+                        android:layout_gravity="center" />
+
+
+                    <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="Sem atividades"
+                        android:textSize="25sp"
+                        android:textColor="#999999"
+                        android:layout_gravity="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="3dp"
+                        android:background="#E1E1E1"/>
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="10dp"
+                        android:background="#fff3f3f3"/>
+                    <View
                         android:layout_width="fill_parent"
                         android:layout_height="3dp"
                         android:background="#E1E1E1"/>
