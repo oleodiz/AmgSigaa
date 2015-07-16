@@ -28,7 +28,6 @@
                 android:text="Turma"
                 android:textSize="20sp"
                 android:textColor="#FFFFFF"
-                android:textStyle="bold"
                 android:maxLines="2"
                 android:gravity="center"
                 />
@@ -40,7 +39,7 @@
                 android:layout_height="60dp"
                 android:id="@+id/img_voltar"
                 android:clickable="true"
-                android:background="@null"/>
+                android:background="@drawable/touch"/>
 
         </FrameLayout>
 
@@ -57,7 +56,16 @@
                 android:layout_height="fill_parent"
                 android:orientation="vertical">
 
-
+                <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Aulas programadas"
+                    android:textSize="20sp"
+                    android:textColor="#666666"
+                    android:textStyle="bold"
+                    android:maxLines="2"
+                    android:gravity="center"
+                    />
 
                 <ListView
                     android:id="@+id/lst_aulas"

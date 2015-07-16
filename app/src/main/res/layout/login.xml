@@ -27,6 +27,14 @@
                 android:src="@drawable/sigaa"
                 android:layout_gravity="center"/>
 
+            <ImageView
+                android:id="@+id/img_info"
+                android:layout_width="60dp"
+                android:layout_height="55dp"
+                android:src="@drawable/info"
+                android:background="@drawable/touch"
+                android:layout_gravity="end"/>
+
         </FrameLayout>
 
 
@@ -40,34 +48,12 @@
                 android:layout_height="fill_parent"
                 android:orientation="vertical">
 
-                <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Meu Amigo"
-                    android:textSize="40sp"
-                    android:textColor="#ff12baee"
-                    android:layout_gravity="center"
-                    android:textStyle="bold"
-                    />
+             <ImageView
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:src="@drawable/meuamigo"
+                 android:layout_gravity="center"/>
 
-                <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Sigaa"
-                    android:textSize="50sp"
-                    android:textColor="#ff1a95ee"
-                    android:layout_gravity="center"
-                    android:textStyle="bold"
-                    />
-                <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Acesse com seu usuário e senha do Sigaa"
-                    android:textSize="14sp"
-                    android:textColor="#999999"
-                    />
 
                 <LinearLayout
                     android:layout_marginLeft="20dp"
@@ -107,7 +93,15 @@
                         android:inputType="textPassword"
                         android:hint="Senha"
                         />
-
+                    <ext.sigaa.ldz.amgsigaa.Auxiliares.FontTextView
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="Acesse com seu usuário e senha do Sigaa"
+                        android:textSize="14sp"
+                        android:textColor="#999999"
+                        />
 
                     <info.hoang8f.widget.FButton
                         android:id="@+id/btn_entrar"

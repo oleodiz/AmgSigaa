@@ -1,5 +1,6 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -28,12 +29,12 @@
 
             <ImageView
                 android:id="@+id/img_notas"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="15dp"
                 android:layout_width="40dp"
                 android:layout_height="55dp"
                 android:layout_gravity="end"
                 android:src="@drawable/notas"
-                android:background="@null"/>
+                android:background="@drawable/touch"/>
 
         </FrameLayout>
 
@@ -427,7 +428,6 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
                     android:background="#E1E1E1"/>
-
 
                 <ext.sigaa.ldz.amgsigaa.Auxiliares.AutoFitTextView
                     android:layout_marginTop="10dp"

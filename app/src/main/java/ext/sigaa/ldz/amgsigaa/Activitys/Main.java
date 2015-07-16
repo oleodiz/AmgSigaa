@@ -43,6 +43,7 @@ import ext.sigaa.ldz.amgsigaa.Adapters.ListaTurmasAdapter;
 import ext.sigaa.ldz.amgsigaa.Adapters.PagerAdapter;
 import ext.sigaa.ldz.amgsigaa.Adapters.TurmaAdapter;
 import ext.sigaa.ldz.amgsigaa.Auxiliares.SlidingTabLayout;
+import ext.sigaa.ldz.amgsigaa.BuildConfig;
 import ext.sigaa.ldz.amgsigaa.Fragments.BarChartFragment;
 import ext.sigaa.ldz.amgsigaa.Objetos.Aula;
 import ext.sigaa.ldz.amgsigaa.Objetos.DetalhesTurma;
@@ -101,6 +102,7 @@ public class Main extends FragmentActivity implements ActionBar.TabListener {
     boolean comErro;
     FrameLayout area_geral;
     WebView web;
+    boolean carregado;
     PaginaAtual pagina;
     SharedPreferences dadosSalvos;
     SharedPreferences.Editor editor;
@@ -113,6 +115,7 @@ public class Main extends FragmentActivity implements ActionBar.TabListener {
     EditText edt_usuario, edt_senha;
     Button btn_entrar;
     NiftyDialogBuilder dialogo;
+    ImageView img_info;
     //OBJETOS DISCENTE
     TextView  txt_nome,txt_curso, txt_matricula, txt_email, txt_nivel, txt_status, txt_ingresso, txt_entrada, txt_mgp, txt_regularidade, txt_percentual;
     ImageView img_perfil, img_notas;
@@ -165,34 +168,36 @@ public class Main extends FragmentActivity implements ActionBar.TabListener {
         //area_geral.addView(vw_login);
         constroiObjetosLogin();
 
-
-
         web.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap facIcon) {
+                carregado = false;
+            }
 
             public void onPageFinished(WebView view, String url) {
+                carregado = true;
+                ArrayList<String> scripts = new ArrayList<String>();
+                scripts.add("window.METODOS.processHTML(document.getElementsByTagName('html')[0].innerHTML);");
+                executaScripts(scripts);
+                if (url.contains("verMenuPrincipal")) {
+                    pagina = PaginaAtual.MENU_PRINCIPAL;
+                    web.loadUrl("https://www.sigaa.ufs.br/sigaa/verPortalDiscente.do");
+                    web.getSettings().setLoadsImagesAutomatically(true);
 
-                    ArrayList<String> scripts = new ArrayList<String>();
-                    scripts.add("window.METODOS.processHTML(document.getElementsByTagName('html')[0].innerHTML);");
-                    executaScripts(scripts);
-                    if (url.contains("verMenuPrincipal")) {
-                        pagina = PaginaAtual.MENU_PRINCIPAL;
-                        web.loadUrl("https://www.sigaa.ufs.br/sigaa/verPortalDiscente.do");
-                        web.getSettings().setLoadsImagesAutomatically(true);
+                } else {
+                    if (pagina != PaginaAtual.NOTAS)
+                    if (url.contains("docente.jsf") || url.contains("discente.jsf")) {
 
-                    } else {
-                        if (pagina != PaginaAtual.NOTAS)
-                        if (url.contains("docente.jsf") || url.contains("discente.jsf")) {
-
-                            if (pagina != PaginaAtual.PORTAL_DISCENTE) {
-                                pagina = PaginaAtual.PORTAL_DISCENTE;
-                            }
-                            else
-                                if (posicaoTurmaSelecionada != -1)
-                                    pagina = PaginaAtual.TURMA;
-                        } else {
-                            pagina = PaginaAtual.LOGIN;
+                        if (pagina != PaginaAtual.PORTAL_DISCENTE) {
+                            pagina = PaginaAtual.PORTAL_DISCENTE;
                         }
+                        else
+                            if (posicaoTurmaSelecionada != -1)
+                                pagina = PaginaAtual.TURMA;
+                    } else {
+                        pagina = PaginaAtual.LOGIN;
                     }
+                }
 
             }
         });
@@ -232,6 +237,7 @@ public class Main extends FragmentActivity implements ActionBar.TabListener {
         btn_entrar = (Button) vw_login.findViewById(R.id.btn_entrar);
         edt_usuario = (EditText) vw_login.findViewById(R.id.edt_usuario);
         edt_senha = (EditText) vw_login.findViewById(R.id.edt_senha);
+        img_info = (ImageView) vw_login.findViewById(R.id.img_info);
         edt_usuario.setText(dadosSalvos.getString("USUARIO", ""));
 
         btn_entrar.setOnClickListener(new View.OnClickListener() {
@@ -251,11 +257,34 @@ public class Main extends FragmentActivity implements ActionBar.TabListener {
                 hideKeyboard();
                 ExibeDialog("Entrando...", false, false, R.drawable.entrando, true);
 
-                if(codErro == 2) ExibeDialog("Conexão não estabelecida!", true, true, R.drawable.semrede, false);
-                if(codErro == 4) ExibeDialog("Sistema em manutenção!", true, true, R.drawable.semrede, false);
+                if (codErro == 2)
+                    ExibeDialog("Conexão não estabelecida!", true, true, R.drawable.semrede, false);
+                if (codErro == 4)
+                    ExibeDialog("Sistema em manutenção!", true, true, R.drawable.semrede, false);
             }
         });
+        img_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogo
+                        .withTitle("Versão "+BuildConfig.VERSION_NAME)
+                        .withTitleColor("#FFFFFF")
+                        .withDividerColor("#80BBF0")
+                        .withDialogColor("#FFFFFF")
+                        .withDuration(700)
+                        .withEffect(Effectstype.Fadein)
+                        .isCancelableOnTouchOutside(true)
+                        .isCancelable(true)
+                        .withImg(R.drawable.detalhesinfo, false).show();
 
+                dialogo.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        comErro = false;
+                    }
+                });
+            }
+        });
     }
 
     private void constroiObjetosPerfil()
@@ -279,12 +308,14 @@ public class Main extends FragmentActivity implements ActionBar.TabListener {
         img_notas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pagina = PaginaAtual.NOTAS;
-                ExibeDialog("Acessando Notas...", false, false, R.drawable.entrando, true);
+                if(carregado) {
+                    pagina = PaginaAtual.NOTAS;
+                    ExibeDialog("Acessando Notas...", false, false, R.drawable.entrando, true);
 
-                ArrayList<String> scripts = new ArrayList<String>();
-                scripts.add("cmItemMouseUp($('td:contains(\"Minhas Notas\"):first')[0].parentNode, 3);");
-                executaScripts(scripts);
+                    ArrayList<String> scripts = new ArrayList<String>();
+                    scripts.add("cmItemMouseUp($('td:contains(\"Minhas Notas\"):first')[0].parentNode, 3);");
+                    executaScripts(scripts);
+                }
             }
         });
 
@@ -295,7 +326,6 @@ public class Main extends FragmentActivity implements ActionBar.TabListener {
         txt_nomeTurma = (TextView) vw_turma.findViewById(R.id.txt_nomeTurma);
         lst_aulas = (ListView) vw_turma.findViewById(R.id.lst_aulas);
         img_voltarT = (ImageView) vw_turma.findViewById(R.id.img_voltar);
-
 
         img_voltarT.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -323,27 +353,6 @@ public class Main extends FragmentActivity implements ActionBar.TabListener {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
 
     public void processaImagem()
@@ -564,15 +573,16 @@ public class Main extends FragmentActivity implements ActionBar.TabListener {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
                 {
-                    posicaoTurmaSelecionada = i;
-                    ArrayList<String> scripts = new ArrayList<String>();
-                    scripts.add("jsfcljs(document.forms['"+minhasTurmas.get(i).idForm+"'],'"+minhasTurmas.get(i).idForm+":turmaVirtual,"+minhasTurmas.get(i).idForm+":turmaVirtual','');");
-                    executaScripts(scripts);
+                    if(carregado) {
+                        posicaoTurmaSelecionada = i;
+                        ArrayList<String> scripts = new ArrayList<String>();
+                        scripts.add("jsfcljs(document.forms['" + minhasTurmas.get(i).idForm + "'],'" + minhasTurmas.get(i).idForm + ":turmaVirtual," + minhasTurmas.get(i).idForm + ":turmaVirtual','');");
+                        executaScripts(scripts);
 
-                    ExibeDialog("Acessando turma...", false, false, R.drawable.entrando, true);
+                        ExibeDialog("Acessando turma...", false, false, R.drawable.entrando, true);
+                    }
                 }
             });
-
 
         }
         protected Turma trataTurma(String turma)

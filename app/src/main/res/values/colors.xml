@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <drawable name="cor_touch">#0f000000</drawable>
+    <drawable name="cor_no_touch">#00000000</drawable>
     <color name="fbutton_default_color">#3eadeb</color>
     <color name="fbutton_default_shadow_color">#ff3493c8</color>
     <color name="fbutton_color_turquoise">#1abc9c</color>
