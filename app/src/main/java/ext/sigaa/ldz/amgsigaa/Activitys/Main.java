@@ -441,11 +441,17 @@ public class Main extends FragmentActivity implements ActionBar.TabListener {
             email = areaPerfil.substring(areaPerfil.indexOf("E-Mail:") + 13, areaPerfil.indexOf("Entrada:"));
             email = limpaString(email);
 
-            semestre = areaPerfil.substring(areaPerfil.indexOf("Entrada:") + 14, areaPerfil.indexOf("Ingresso:"));
+            int auxEntrada = areaPerfil.indexOf("Entrada:") + 14;
+            semestre = areaPerfil.substring(auxEntrada, areaPerfil.indexOf("</td>", auxEntrada+10));
             semestre = limpaString(semestre);
 
-            ingresso = areaPerfil.substring(areaPerfil.indexOf("Ingresso:") + 15, areaPerfil.indexOf("Ingresso:") + 45);
-            ingresso = limpaString(ingresso);
+            int auxIngresso = areaPerfil.indexOf("Ingresso:");
+            if (auxIngresso != -1)
+            {
+                ingresso = areaPerfil.substring(areaPerfil.indexOf("Ingresso:") + 15, areaPerfil.indexOf("Ingresso:") + 45);
+                ingresso = limpaString(ingresso);
+            }
+
 
             MGP = areaPerfil.substring(areaPerfil.indexOf("MGP:") + 82, areaPerfil.indexOf("MGP:") + 86);
             MGP = MGP.replace("<", "");
